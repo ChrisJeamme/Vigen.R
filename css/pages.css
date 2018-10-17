@@ -2,3 +2,13 @@
 {
     display: none;
 }
+
+.navbar-brand
+{
+    font-size: 2em;
+}
+
+.error
+{
+    border: 2px solid #ff3860;
+}
