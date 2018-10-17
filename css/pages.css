@@ -1,6 +1,6 @@
 .hide
 {
-    display: none;
+    display: none !important; 
 }
 
 .navbar-brand

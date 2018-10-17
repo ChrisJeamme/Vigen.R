@@ -3,7 +3,22 @@ const ERROR_DISPLAYING_DELAY = 2000;
 var pageInitialisation = function()
 {
     //// Ecouteurs JBL ////
-    
+
+    // Gestion activation boutons
+    document.querySelector('#decodingKeyTextArea').onchange = 
+    ()=>
+    {
+        console.log('vide'+document.querySelector('#decodingKeyTextArea').value=="")
+        if(document.querySelector('#decodingTextArea').value!="")
+        {
+            if(document.querySelector('#decodingKeyTextArea').value=="")    
+                displayElement('#attackButton');
+            if(document.querySelector('#decodingKeyTextArea').value!="")    
+                hideElement('#attackButton');
+        }
+        
+    };
+
     // Gestion clic bouton encodage
     document.querySelector('#encodingMod').onclick =
     ()=>
@@ -32,14 +47,41 @@ var pageInitialisation = function()
         hideElement("#attackSection");
     };})
 
+    // Gestion clic bouton bombe
+    document.querySelector('#attackButton').onclick =
+    ()=>
+    {
+        hideElement("#encodingSection");
+        displayElement("#attackSection");
+        hideElement("#encodingMod");
+        hideElement("#attackMod");
+        
+        if(document.querySelector('#encodingTextArea').value == "")
+            displayErrorColor("#encodingTextArea");
+        else 
+            if(document.querySelector('#encodingKeyTextArea').value == "")
+                displayErrorColor("#encodingKeyTextArea");
+            else
+            {
+                document.querySelector('#decodingKeyTextArea').value = document.querySelector('#encodingKeyTextArea').value;
+                document.querySelector('#decodingTextArea').value = encoding(document.querySelector('#encodingTextArea').value, document.querySelector('#encodingKeyTextArea').value);
+            }
+    }
+    
     // Gestion clic bouton encodage
     document.querySelector('#encodingButton').onclick =
     ()=>
     {
         if(document.querySelector('#encodingTextArea').value == "")
             displayErrorColor("#encodingTextArea");
-        else
-            document.querySelector('#decodingTextArea').value = encoding(document.querySelector('#encodingTextArea').value);
+        else 
+            if(document.querySelector('#encodingKeyTextArea').value == "")
+                displayErrorColor("#encodingKeyTextArea");
+            else
+            {
+                document.querySelector('#decodingKeyTextArea').value = document.querySelector('#encodingKeyTextArea').value;
+                document.querySelector('#decodingTextArea').value = encoding(document.querySelector('#encodingTextArea').value, document.querySelector('#encodingKeyTextArea').value);
+            }
     }
 
     // Gestion clic bouton décodage
@@ -49,7 +91,15 @@ var pageInitialisation = function()
         if(document.querySelector('#decodingTextArea').value == "")
             displayErrorColor("#decodingTextArea");
         else
-            document.querySelector('#encodingTextArea').value = decoding(document.querySelector('#decodingTextArea').value);
+        {
+            if(document.querySelector('#decodingKeyTextArea').value == "")
+                displayErrorColor("#decodingKeyTextArea");
+            else
+            {
+                document.querySelector('#encodingKeyTextArea').value = document.querySelector('#decodingKeyTextArea').value;
+                document.querySelector('#encodingTextArea').value = decoding(document.querySelector('#decodingTextArea').value, document.querySelector('#decodingKeyTextArea').value);
+            }
+        }
     }
 }
 
@@ -70,7 +120,7 @@ var hideElement = function(elementName) // Cache un élément
             element.classList.add("hide");
 }
 
-var displayErrorColor = function(elementName) // 
+var displayErrorColor = function(elementName)
 {
     var element = document.querySelector(elementName);
     if(element != undefined && element != null)
@@ -80,4 +130,18 @@ var displayErrorColor = function(elementName) //
             setTimeout(()=>{element.classList.remove('error')}, ERROR_DISPLAYING_DELAY);
         }
             
+}
+
+var addClass = function(elementName, className)
+{
+    if(document.querySelector(elementName)!=null && document.querySelector(elementName)!=undefined)
+        if(!document.querySelector(elementName).classList.contains(className))
+            document.querySelector(elementName).classList.add(className);
+}
+
+var removeClass = function(elementName, className)
+{
+    if(document.querySelector(elementName)!=null && document.querySelector(elementName)!=undefined)
+        if(document.querySelector(elementName).classList.contains(className))
+            document.querySelector(elementName).classList.remove(className);
 }
