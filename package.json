@@ -1,0 +1,22 @@
+{
+  "name": "vigen.r",
+  "version": "1.0.0",
+  "description": "Projet Vigen.R",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisJeamme/Vigen.R.git"
+  },
+  "author": "PTDQ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisJeamme/Vigen.R/issues"
+  },
+  "homepage": "https://github.com/ChrisJeamme/Vigen.R#readme",
+  "dependencies": {
+    "bulma": "^0.7.2"
+  }
+}
