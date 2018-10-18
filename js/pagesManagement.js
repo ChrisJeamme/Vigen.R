@@ -56,7 +56,7 @@ var pageInitialisation = function()
         hideElement("#encodingMod");
         hideElement("#attackMod");
         
-        if(document.querySelector('#encodingTextArea').value == "")
+        if(isEmptyTextArea('#encodingTextArea'))
             displayErrorColor("#encodingTextArea");
         else 
             if(document.querySelector('#encodingKeyTextArea').value == "")
@@ -144,4 +144,9 @@ var removeClass = function(elementName, className)
     if(document.querySelector(elementName)!=null && document.querySelector(elementName)!=undefined)
         if(document.querySelector(elementName).classList.contains(className))
             document.querySelector(elementName).classList.remove(className);
+}
+
+var isEmptyTextArea = function(elementName)
+{
+    return document.querySelector(elementName).value == "";
 }

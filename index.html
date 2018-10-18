@@ -11,6 +11,7 @@
         <!-- Bulma Version 0.7.1-->
         <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css" />
         <link rel="stylesheet" href="css/pages.css" />
+        <link rel="stylesheet" href="css/particules-js.css" />
     </head>
     <body>
         
@@ -18,7 +19,8 @@
         <script src="js/pagesManagement.js"></script>
         <script src="js/vigenere.js"></script>
 
-        <section class="hero is-bold is-info" id="particles-js">
+        <section class="hero is-bold is-info">
+            <div id="particles-js"></div>
             <div class="hero-head"> <!-- Barre du haut -->
                 <nav class="navbar">
                     <div class="container">
@@ -53,9 +55,7 @@
                     <h1 class="title">
                         Chiffre de Vigenère
                     </h1>
-
-                    <div id="error"></div>
-
+                    
                     <button class="button is-rounded is-large is-link" id="encodingMod">Encodage/Décodage</button> <br /><br />
                     <button class="button is-rounded is-large is-link" id="attackMod">Attaque</button>
 
@@ -79,8 +79,8 @@
                                 <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
                             </div>
                             <div class="column is-inline-flex" style="flex-direction: column; justify-content: center;">
-                                <button id="encodingButton" class="button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
-                                <button id="decodingButton" class="button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
+                                <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
+                                <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
                                </div>
                             <div class="column">
                                 <h1 class="title">
@@ -120,7 +120,7 @@
 
                 </div>
             </div>
-        
+        </section>
         <footer class="footer"> <!-- Barre du bas -->
             <div class="container">
                 <div class="content has-text-centered">
@@ -131,8 +131,8 @@
             </div>
         </footer>
 
-        <!-- <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-        <script src="js/particules-js.js"></script> -->
+        <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+        <script src="js/particules-js.js"></script>
 
         <script>
             pageInitialisation();
