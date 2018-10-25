@@ -1,8 +1,8 @@
 const messageTransformation = ( msg ) => msg.replace(/[^a-zA-Z]/g,'').toUpperCase();
 
-const encoding = function(message,key)
+// Génère une répétition de la clé égale à la longueur du message
+const generateRepeatedKey = function(message,key)
 {
-    // TODO
     let repeatedKey = [], j=-1;
     for(let i=0; i<message.length; i++)
     {
@@ -11,11 +11,12 @@ const encoding = function(message,key)
             j=0;
         repeatedKey[i] = key[j];
     }
+    return repeatedKey;
+}
 
-    console.log("message=\t"+message.split(''));
-    console.log("key=\t\t"+key.split(''));
-    console.log("repeatedKey=\t"+repeatedKey);
-
+const encoding = function(message,key)
+{
+    let repeatedKey = generateRepeatedKey(message,key);
     let encodedMessage = [];
 
     message.split('').forEach(
@@ -43,6 +44,22 @@ const alphabeticDistance = function(char1, char2)
 
 const decoding = function(message,key)
 {
-    // TODO
-    return "decoding("+message+","+key+")";
+    let repeatedKey = generateRepeatedKey(message,key);
+    let decodedMessage = [];
+
+    message.split('').forEach(
+    (messageChar,index)=>
+    {
+        decodedAsciiCharacter = parseInt(messageChar.charCodeAt(0)) - parseInt(alphabeticDistance('A',repeatedKey[index]));
+
+        if(decodedAsciiCharacter < 'A'.charCodeAt(0))
+            decodedAsciiCharacter += 26;
+
+        decodedCharacter = String.fromCharCode(decodedAsciiCharacter);
+        decodedMessage.push(decodedCharacter); 
+    });
+
+    console.log('decodedMessage=\t'+decodedMessage);
+
+    return decodedMessage.join('');
 }
