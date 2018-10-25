@@ -5,19 +5,18 @@ var pageInitialisation = function()
     //// Ecouteurs JBL ////
 
     // Gestion activation boutons
-    document.querySelector('#decodingKeyTextArea').onchange = 
-    ()=>
-    {
-        console.log('vide'+document.querySelector('#decodingKeyTextArea').value=="")
-        if(document.querySelector('#decodingTextArea').value!="")
-        {
-            if(document.querySelector('#decodingKeyTextArea').value=="")    
-                displayElement('#attackButton');
-            if(document.querySelector('#decodingKeyTextArea').value!="")    
-                hideElement('#attackButton');
-        }
-        
-    };
+    // document.querySelector('#decodingKeyTextArea').onchange = 
+    // ()=>
+    // {
+    //     console.log('vide'+document.querySelector('#decodingKeyTextArea').value=="")
+    //     if(document.querySelector('#decodingTextArea').value!="")
+    //     {
+    //         if(document.querySelector('#decodingKeyTextArea').value=="")    
+    //             displayElement('#attackButton');
+    //         if(document.querySelector('#decodingKeyTextArea').value!="")    
+    //             hideElement('#attackButton');
+    //     }
+    // };
 
     // Gestion clic bouton encodage
     document.querySelector('#encodingMod').onclick =
@@ -56,7 +55,7 @@ var pageInitialisation = function()
         hideElement("#encodingMod");
         hideElement("#attackMod");
         
-        if(isEmptyTextArea('#encodingTextArea'))
+        if(document.querySelector('#encodingTextArea').value == "")
             displayErrorColor("#encodingTextArea");
         else 
             if(document.querySelector('#encodingKeyTextArea').value == "")
@@ -72,15 +71,27 @@ var pageInitialisation = function()
     document.querySelector('#encodingButton').onclick =
     ()=>
     {
-        if(document.querySelector('#encodingTextArea').value == "")
+        let textToEncode = document.querySelector('#encodingTextArea').value;
+        let keyForEncoding = document.querySelector('#encodingKeyTextArea').value;
+
+        if(textToEncode == "")
             displayErrorColor("#encodingTextArea");
         else 
-            if(document.querySelector('#encodingKeyTextArea').value == "")
+            if(keyForEncoding == "")
                 displayErrorColor("#encodingKeyTextArea");
             else
             {
-                document.querySelector('#decodingKeyTextArea').value = document.querySelector('#encodingKeyTextArea').value;
-                document.querySelector('#decodingTextArea').value = encoding(document.querySelector('#encodingTextArea').value, document.querySelector('#encodingKeyTextArea').value);
+                textToEncode = messageTransformation(textToEncode);
+                keyForEncoding = messageTransformation(keyForEncoding);
+
+                // Mise en forme du message
+                document.querySelector('#encodingTextArea').value = textToEncode; 
+                // Mise en forme de la clé
+                document.querySelector('#encodingKeyTextArea').value = keyForEncoding; 
+                // Copie de la clé du coté décodage
+                document.querySelector('#decodingKeyTextArea').value = keyForEncoding;
+                // Décodage et ecriture du coté décodage
+                document.querySelector('#decodingTextArea').value = encoding(textToEncode, keyForEncoding);
             }
     }
 
@@ -144,9 +155,4 @@ var removeClass = function(elementName, className)
     if(document.querySelector(elementName)!=null && document.querySelector(elementName)!=undefined)
         if(document.querySelector(elementName).classList.contains(className))
             document.querySelector(elementName).classList.remove(className);
-}
-
-var isEmptyTextArea = function(elementName)
-{
-    return document.querySelector(elementName).value == "";
 }

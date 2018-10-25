@@ -1,9 +1,10 @@
+const messageTransformation = ( msg ) => msg.replace(/[^a-zA-Z]/g,'').toUpperCase();
 
-var encoding = function(message,key)
+const encoding = function(message,key)
 {
     // TODO
-    var repeatedKey = [], j=-1;
-    for(var i=0; i<message.length; i++)
+    let repeatedKey = [], j=-1;
+    for(let i=0; i<message.length; i++)
     {
         j++;
         if(j >= key.length)
@@ -15,20 +16,32 @@ var encoding = function(message,key)
     console.log("key=\t\t"+key.split(''));
     console.log("repeatedKey=\t"+repeatedKey);
 
-    var result = [];
+    let encodedMessage = [];
 
     message.split('').forEach(
     (messageChar,index)=>
     {
-        console.log('M='+messageChar);
-        console.log('K='+repeatedKey[index]);
-        console.log('Resultat='+(String.fromCharCode(97+messageChar.charCodeAt(0)-repeatedKey[index].charCodeAt(0))))
-        
+        encodedAsciiCharacter = parseInt(repeatedKey[index].charCodeAt(0)) + parseInt(alphabeticDistance('A',messageChar));
+
+        if(encodedAsciiCharacter > 'Z'.charCodeAt(0))
+            encodedAsciiCharacter -= 26;
+
+        encodedCharacter = String.fromCharCode(encodedAsciiCharacter);
+        encodedMessage.push(encodedCharacter); 
     });
 
-    return "encoding("+message+","+key+")";
+    console.log('encodedMessage=\t'+encodedMessage);
+
+    return encodedMessage.join('');
 }
-var decoding = function(message,key)
+
+// Donne la distance entre 2 lettres de l'alphabet
+const alphabeticDistance = function(char1, char2)
+{
+    return Math.abs(char1.charCodeAt(0) - char2.charCodeAt(0));
+}
+
+const decoding = function(message,key)
 {
     // TODO
     return "decoding("+message+","+key+")";
