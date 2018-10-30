@@ -47,7 +47,7 @@ var pageInitialisation = function()
     };})
 
     // Gestion clic bouton bombe
-    document.querySelector('#attackButton').onclick =
+    document.querySelector('#attackSectionButton').onclick =
     ()=>
     {
         hideElement("#encodingSection");
@@ -110,6 +110,18 @@ var pageInitialisation = function()
                 document.querySelector('#encodingKeyTextArea').value = document.querySelector('#decodingKeyTextArea').value;
                 document.querySelector('#encodingTextArea').value = decoding(document.querySelector('#decodingTextArea').value, document.querySelector('#decodingKeyTextArea').value);
             }
+        }
+    }
+
+    // Gestion clic bouton attaque
+    document.querySelector('#attackButton').onclick =
+    ()=>
+    {
+        if(document.querySelector('#attackTextArea').value == "")
+            displayErrorColor("#attackTextArea");
+        else
+        {
+            findKeyLength(document.querySelector('#attackTextArea').value);
         }
     }
 }

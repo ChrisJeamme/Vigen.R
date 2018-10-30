@@ -18,6 +18,7 @@
         <!-- Scripts -->
         <script src="js/pagesManagement.js"></script>
         <script src="js/vigenere.js"></script>
+        <script src="js/kasiski.js"></script>
 
         <section class="hero is-bold is-info">
             <div id="particles-js"></div>
@@ -99,7 +100,7 @@
                             </div>
                         </div>
 
-                        <button id="attackButton" class="button is-rounded is-danger is-large"><!-- <i class="fa fa-angle-double-left"></i> --><i class="fa fa-bomb m-5"></i></button>
+                        <button id="attackSectionButton" class="button is-rounded is-danger is-large"><!-- <i class="fa fa-angle-double-left"></i> --><i class="fa fa-bomb m-5"></i></button>
                     
                         
                     </div>
@@ -108,14 +109,17 @@
                         <button class="closeMod button is-large is-danger is-rounded" hidden>Retour</button> <!-- Bouton de fermeture du mode -->
                         <br />
                         <br />
-
+                        
                         <h1 class="title">
                             Message chiffré
                         </h1>
                         <h2 class="subtitle">
                             Tapez votre message chiffré à attaquer afin de trouver le message d'origine
                         </h2>
-                        <textarea id="encodingTextArea" class="textarea" placeholder="Message à coder"></textarea>
+                        <textarea id="attackTextArea" class="textarea" placeholder="Chiffré à attaquer"></textarea>
+                        
+                        <br />
+                        <button id="attackButton" class="button is-large is-danger is-rounded" hidden>A l'attaque !</button> <!-- Bouton de fermeture du mode -->
                     </div>
 
                 </div>
