@@ -1,3 +1,4 @@
-const findKeyLength = function(message) {
+const findKeyLength = function(message)
+{
     console.info(message);
 }
