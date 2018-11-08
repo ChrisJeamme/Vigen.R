@@ -3,11 +3,10 @@
 // Trouve la longueur de la clé de cryptage
 const findKeyLength = function(message)
 {
-    let cutSize = 50;
+    let cutSize = 30;
     let possibleKeyLengths = [];
-    let numberOfSequences = 0;
 
-    while(cutSize > 2 && !canWeStop(possibleKeyLengths) && numberOfSequences > 3)
+    while(cutSize > 2 && possibleKeyLengths.length !== 1)
     {
         console.log("cutSize = ", cutSize);
         let sequences = {};
@@ -84,13 +83,31 @@ const findRepetition = function(size, message, sequences, interestingSequences)
     }
 
     // Elimination des séquences à 1 occurrence
+    console.log("size:",size);
+    console.log("interestingSequences:",interestingSequences);
+    
     interestingSequencesNames.forEach((seq)=>
     {
-        interestingSequences[seq] = sequences[seq];
-        interestingSequences[seq].occurrency = interestingSequences[seq].index.length;
+        if(!isSequenceInInterestingSequences(seq, interestingSequences))
+        {
+            interestingSequences[seq] = sequences[seq];
+            interestingSequences[seq].occurrency = interestingSequences[seq].index.length;
+        }
     });
 
 };
+
+const isSequenceInInterestingSequences = function(sequence, interestingSequences)
+{
+    Object.keys(interestingSequences).forEach(element => 
+        {
+            if(element.includes(sequence))
+            {
+                return true;
+            }
+        });
+    return false;
+}
 
 const findDividers = function(integer)
 {
