@@ -23,8 +23,8 @@ window.onkeyup = function(e)
     else if (key == 84) // Touche T
     {
         // Faire ce que vous voulez (tests etc.)
-    }
-}
+    } 
+} 
 
 ///////////////////
 // Ecouteurs JBL //
