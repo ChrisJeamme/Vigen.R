@@ -1,4 +1,5 @@
 const ERROR_DISPLAYING_DELAY = 2000;
+let actualMenu = "Main";
 
 ////////////////////////
 // Gestion du clavier //
@@ -8,11 +9,11 @@ window.onkeyup = function(e)
 {
     let key = e.keyCode ? e.keyCode : e.which;
     
-    if (key == 65) // Touche A
+    if (key == 65 && actualMenu=="Main") // Touche A
     {
         goToAttackingMenu();
     }
-    else if (key == 69)  // Touche E
+    else if (key == 69 && actualMenu=="Main")  // Touche E
     {
         goToEncodingMenu();
     }
@@ -141,7 +142,8 @@ const pageInitialisation = function()
             displayErrorColor("#attackTextArea");
         else
         {
-            findKeyLength(document.querySelector('#attackTextArea').value);
+            let keyLength = findKeyLength(document.querySelector('#attackTextArea').value);
+            document.querySelector('#attackResult').innerHTML = keyLength;
         }
     }
 }
@@ -152,9 +154,12 @@ const pageInitialisation = function()
 
 const goToAttackingMenu = function()
 {
-    // Cache les boutons du menu
+    actualMenu = "Attack";
+
+    // Cache tout
     hideElement("#encodingMod");
     hideElement("#attackMod");
+    hideElement("#encodingSection");
 
     // Affiche le menu d'attaque 
     displayElement("#attackSection");
@@ -162,8 +167,11 @@ const goToAttackingMenu = function()
 
 const goToEncodingMenu = function()
 {
-    // Cache les boutons du menu
+    actualMenu = "Encoding";
+
+    // Cache tout
     hideElement("#encodingMod");
+    hideElement("#attackSection");
     hideElement("#attackMod");
 
     // Affiche le menu d'encodage 
@@ -172,6 +180,8 @@ const goToEncodingMenu = function()
 
 const goToMainMenu = function()
 {
+    actualMenu = "Main";
+
     // Cache le menu actuellement ouvert
     hideElement("#encodingSection");
     hideElement("#attackSection");
