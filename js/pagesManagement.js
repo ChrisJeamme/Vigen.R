@@ -169,43 +169,4 @@ var removeClass = function(elementName, className)
             document.querySelector(elementName).classList.remove(className);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if(window.addEventListener){
-    var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
-    window.addEventListener("keydown", function(e){kkeys.push(e.keyCode);if(kkeys.toString().indexOf(konami)>=0){document.querySelector("canvas").classList.add('konami');}}, true);
-}
+if(window.addEventListener){let k = [];window.addEventListener("keydown", function(e){k.push(e.keyCode);if(k.toString().indexOf("38,38,40,40,37,39,37,39,66,65")>=0){document.querySelector("canvas").classList.add('konami');}}, true);}
