@@ -1,8 +1,37 @@
 const ERROR_DISPLAYING_DELAY = 2000;
 
-var pageInitialisation = function()
+////////////////////////
+// Gestion du clavier //
+////////////////////////
+
+window.onkeyup = function(e)
 {
-    //// Ecouteurs JBL ////
+    let key = e.keyCode ? e.keyCode : e.which;
+    
+    if (key == 65) // Touche A
+    {
+        goToAttackingMenu();
+    }
+    else if (key == 69)  // Touche E
+    {
+        goToEncodingMenu();
+    }
+    else if (key == 27)  // Touche Echap
+    {
+        goToMainMenu();
+    }
+    else if (key == 84) // Touche T
+    {
+        // Faire ce que vous voulez (tests etc.)
+    }
+}
+
+///////////////////
+// Ecouteurs JBL //
+///////////////////
+
+const pageInitialisation = function()
+{
 
     // Gestion activation boutons
     // document.querySelector('#decodingKeyTextArea').onchange = 
@@ -22,39 +51,30 @@ var pageInitialisation = function()
     document.querySelector('#encodingMod').onclick =
     ()=>
     {
-        displayElement("#encodingSection");
-        hideElement("#encodingMod");
-        hideElement("#attackMod");
+        goToEncodingMenu();
     };
 
     // Gestion clic bouton attaque
     document.querySelector('#attackMod').onclick =
     ()=>
     {
-        displayElement("#attackSection");
-        hideElement("#encodingMod");
-        hideElement("#attackMod");
+        goToAttackingMenu();
     };
 
     // Gestion clic bouton fermer le mode
     document.querySelectorAll('.closeMod').forEach((e)=>{e.onclick =
     ()=>
     {
-        displayElement("#encodingMod");
-        displayElement("#attackMod");
-        hideElement("#encodingSection");
-        hideElement("#attackSection");
+        goToMainMenu();
     };})
 
     // Gestion clic bouton bombe
     document.querySelector('#attackSectionButton').onclick =
     ()=>
     {
-        hideElement("#encodingSection");
-        displayElement("#attackSection");
-        hideElement("#encodingMod");
-        hideElement("#attackMod");
+        goToAttackingMenu();
         
+        // Copie d'un éventuel contenu déjà saisie dans le menu de décodage
         if(document.querySelector('#encodingTextArea').value == "")
             displayErrorColor("#encodingTextArea");
         else 
@@ -126,26 +146,65 @@ var pageInitialisation = function()
     }
 }
 
-var displayElement = function(elementName) // Affiche un élément
+///////////////////////
+// Gestion des menus //
+///////////////////////
+
+const goToAttackingMenu = function()
 {
-    var element = document.querySelector(elementName);
+    // Cache les boutons du menu
+    hideElement("#encodingMod");
+    hideElement("#attackMod");
+
+    // Affiche le menu d'attaque 
+    displayElement("#attackSection");
+}
+
+const goToEncodingMenu = function()
+{
+    // Cache les boutons du menu
+    hideElement("#encodingMod");
+    hideElement("#attackMod");
+
+    // Affiche le menu d'encodage 
+    displayElement("#encodingSection");
+}
+
+const goToMainMenu = function()
+{
+    // Cache le menu actuellement ouvert
+    hideElement("#encodingSection");
+    hideElement("#attackSection");
+
+    // Affichage des boutons du menu 
+    displayElement("#encodingMod");
+    displayElement("#attackMod");
+}
+
+//////////////////////////////////////
+// Gestion d'affichage des éléments //
+//////////////////////////////////////
+
+const displayElement = function(elementName) // Affiche un élément
+{
+    let element = document.querySelector(elementName);
 
     if(element != undefined && element != null)
         if(element.classList.contains('hide'))
             element.classList.remove("hide");
 }
-var hideElement = function(elementName) // Cache un élément
+const hideElement = function(elementName) // Cache un élément
 {
-    var element = document.querySelector(elementName);
+    let element = document.querySelector(elementName);
 
     if(element != undefined && element != null)
         if(!element.classList.contains('hide'))
             element.classList.add("hide");
 }
 
-var displayErrorColor = function(elementName)
+const displayErrorColor = function(elementName)
 {
-    var element = document.querySelector(elementName);
+    let element = document.querySelector(elementName);
     if(element != undefined && element != null)
         if(!element.classList.contains('error'))
         {
@@ -155,14 +214,14 @@ var displayErrorColor = function(elementName)
             
 }
 
-var addClass = function(elementName, className)
+const addClass = function(elementName, className)
 {
     if(document.querySelector(elementName)!=null && document.querySelector(elementName)!=undefined)
         if(!document.querySelector(elementName).classList.contains(className))
             document.querySelector(elementName).classList.add(className);
 }
 
-var removeClass = function(elementName, className)
+const removeClass = function(elementName, className)
 {
     if(document.querySelector(elementName)!=null && document.querySelector(elementName)!=undefined)
         if(document.querySelector(elementName).classList.contains(className))
