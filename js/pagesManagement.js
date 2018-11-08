@@ -1,7 +1,6 @@
 const ERROR_DISPLAYING_DELAY = 2000;
 let actualMenu = "Main";
 
-
 ////////////////////////
 // Gestion du clavier //
 ////////////////////////
