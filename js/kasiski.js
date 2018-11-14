@@ -5,20 +5,21 @@ const findKeyLength = function(message)
 {
     let cutSize = 30;
     let possibleKeyLengths = [];
-
-    while(cutSize > 2 && possibleKeyLengths.length !== 1)
-    {
-        console.log("cutSize = ", cutSize);
-        let sequences = {};
-        let interestingSequences = {};
+    let savedSequences = [];
+    let numberOfIntersection = 0;
     
-        findRepetition(cutSize, message, sequences, interestingSequences);
+    while(cutSize > 2 && possibleKeyLengths.length !== 1 && numberOfIntersection<5)
+    {
+        // console.log("cutSize = ", cutSize);
+        let interestingSequences = {};
+        
+        findRepetition(cutSize, message, interestingSequences, savedSequences);
     
         // console.log(sequences);
         // console.log("Séquences intéréssantes = ");
         // console.log(interestingSequences);
     
-        for(seq in interestingSequences)
+        for(seq in interestingSequences) //On parcourt les séquences intéressantes trouvées de cette longueur
         {
             // console.log(seq);
             // console.log("Longueur = "+interestingSequences[seq].index.length);
@@ -40,12 +41,15 @@ const findKeyLength = function(message)
                         possibleKeyLengths = findDividers(seperationLength);
                     }
                     possibleKeyLengths = intersect(possibleKeyLengths, findDividers(seperationLength));
+                    numberOfIntersection++;
                     // addNewPossibleKeyLength(possibleKeyLengths, seperationLength);
                     console.log(possibleKeyLengths);
                 }
             )
         }
         cutSize--;
+        console.log("SavedSequences :", savedSequences);
+        console.log("possibleKeyLength :", possibleKeyLengths);
     }
     console.log("Longueur de la clé :", possibleKeyLengths[possibleKeyLengths.length-1]);
 
@@ -60,17 +64,19 @@ const addNewPossibleKeyLength = function(possibleKeyLengths, seperationLength)
 }
 
 // Découpe le message et trouve les séquences qui se répètent
-const findRepetition = function(size, message, sequences, interestingSequences)
+const findRepetition = function(size, message, interestingSequences, savedSequences)
 {
     let interestingSequencesNames = [];
+    let sequences = {};
 
     // Découpage
     for (let i=0; i<message.length-size-1; i++)
     {
         let substr = message.substring(i, i+size);
-        if (sequences[substr] && !interestingSequencesNames.includes(substr)) //On a déjà vu une séquence identique && pas déjà ajouté
+        if (sequences[substr] && !isSequenceInSavedSequences(substr,savedSequences)) //On a déjà vu une séquence identique && pas déjà ajouté
         {
             interestingSequencesNames.push(substr);
+            savedSequences.push(substr);
         }
         else 
         {
@@ -83,29 +89,23 @@ const findRepetition = function(size, message, sequences, interestingSequences)
     }
 
     // Elimination des séquences à 1 occurrence
-    console.log("size:",size);
-    console.log("interestingSequences:",interestingSequences);
-    
     interestingSequencesNames.forEach((seq)=>
     {
-        if(!isSequenceInInterestingSequences(seq, interestingSequences))
-        {
-            interestingSequences[seq] = sequences[seq];
-            interestingSequences[seq].occurrency = interestingSequences[seq].index.length;
-        }
+        interestingSequences[seq] = sequences[seq];
+        interestingSequences[seq].occurrency = interestingSequences[seq].index.length;
     });
 
 };
 
-const isSequenceInInterestingSequences = function(sequence, interestingSequences)
+const isSequenceInSavedSequences = function(sequence, savedSequences)
 {
-    Object.keys(interestingSequences).forEach(element => 
+    for (let i=0; i<savedSequences.length; i++)
+    {
+        if (savedSequences[i].includes(sequence))
         {
-            if(element.includes(sequence))
-            {
-                return true;
-            }
-        });
+            return true;
+        }
+    }
     return false;
 }
 
