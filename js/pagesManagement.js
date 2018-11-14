@@ -102,8 +102,8 @@ const pageInitialisation = function()
                 displayErrorColor("#encodingKeyTextArea");
             else
             {
-                textToEncode = messageTransformation(textToEncode);
-                keyForEncoding = messageTransformation(keyForEncoding);
+                textToEncode = messageTransformation(noAccent(textToEncode));
+                keyForEncoding = messageTransformation(noAccent(keyForEncoding));
 
                 // Mise en forme du message
                 document.querySelector('#encodingTextArea').value = textToEncode; 
