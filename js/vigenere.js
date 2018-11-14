@@ -31,7 +31,7 @@ const encoding = function(message,key)
         encodedMessage.push(encodedCharacter); 
     });
 
-    console.log('encodedMessage=\t'+encodedMessage);
+    // console.log('encodedMessage=\t'+encodedMessage);
 
     return encodedMessage.join('');
 }
@@ -59,7 +59,7 @@ const decoding = function(message,key)
         decodedMessage.push(decodedCharacter); 
     });
 
-    console.log('decodedMessage=\t'+decodedMessage);
+    // console.log('decodedMessage=\t'+decodedMessage);
 
     return decodedMessage.join('');
 }

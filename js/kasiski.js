@@ -43,16 +43,16 @@ const findKeyLength = function(message)
                     possibleKeyLengths = intersect(possibleKeyLengths, findDividers(seperationLength));
                     numberOfIntersection++;
                     // addNewPossibleKeyLength(possibleKeyLengths, seperationLength);
-                    console.log(possibleKeyLengths);
+                    //console.log(possibleKeyLengths);
                 }
             )
         }
         cutSize--;
-        console.log("SavedSequences :", savedSequences);
-        console.log("possibleKeyLength :", possibleKeyLengths);
+        // console.log("SavedSequences :", savedSequences);
+        // console.log("possibleKeyLength :", possibleKeyLengths);
     }
-    console.log("Longueur de la clé :", possibleKeyLengths[possibleKeyLengths.length-1]);
-
+    // console.log("Longueur de la clé :", possibleKeyLengths[possibleKeyLengths.length-1]);
+    return possibleKeyLengths[possibleKeyLengths.length-1];
 };
 
 // Ajoute (si pas déjà présent) un nombre et ses diviseurs à la liste des longueurs de clé possible
@@ -130,9 +130,13 @@ const isPrimeNumber = function(integer)
 
 const intersect = function(array1, array2)
 {
-    return array1.filter(value => {
+    let inter = array1.filter(value => {
         return -1 !== array2.indexOf(value)}
     );
+    if (inter.length === 0)
+        return array1;
+    else 
+        return inter;
 }
 
 const canWeStop = function(array)
@@ -149,6 +153,5 @@ const canWeStop = function(array)
             return false;
         }
     }
-    console.log(array)
     return true;
 }
