@@ -1,48 +1,29 @@
-let charts = [];
-
-const displayFrequencyChart = function(frequency, number)
+const createFrequencyChart = function(useless,number)
 {
-    let displayableFrequencies = [];
-    // Dégueulasse? Ouais mais c'est 5h du mat, j'ai essayé 3 autres trucs qui marche pas alors ça m'a cassé les couilles, à changer bien sûr mais là j'ai pas le time
-    displayableFrequencies[0] = frequency['A'];
-    displayableFrequencies[1] = frequency['B'];
-    displayableFrequencies[2] = frequency['C'];
-    displayableFrequencies[3] = frequency['D'];
-    displayableFrequencies[4] = frequency['E'];
-    displayableFrequencies[5] = frequency['F'];
-    displayableFrequencies[6] = frequency['G'];
-    displayableFrequencies[7] = frequency['H'];
-    displayableFrequencies[8] = frequency['I'];
-    displayableFrequencies[9] = frequency['J'];
-    displayableFrequencies[10] = frequency['K'];
-    displayableFrequencies[11] = frequency['L'];
-    displayableFrequencies[12] = frequency['M'];
-    displayableFrequencies[13] = frequency['N'];
-    displayableFrequencies[14] = frequency['O'];
-    displayableFrequencies[15] = frequency['P'];
-    displayableFrequencies[16] = frequency['Q'];
-    displayableFrequencies[17] = frequency['R'];
-    displayableFrequencies[18] = frequency['S'];
-    displayableFrequencies[19] = frequency['T'];
-    displayableFrequencies[20] = frequency['U'];
-    displayableFrequencies[21] = frequency['V'];
-    displayableFrequencies[22] = frequency['W'];
-    displayableFrequencies[23] = frequency['X'];
-    displayableFrequencies[24] = frequency['Y'];
-    displayableFrequencies[25] = frequency['Z'];
-
-    console.log(displayableFrequencies)
-
+    // Ajout du canvas vide
     document.querySelector('#chartList').innerHTML=document.querySelector('#chartList').innerHTML.concat(`
     <canvas id="chart`+number+`" class="hide chartjs frequencyChart" width="1540" height="400"></canvas>
     `);
 
+    // Ajout d'un bouton pour le graphique
     document.querySelector('#chartMenu').innerHTML=document.querySelector('#chartMenu').innerHTML.concat(`
-    <li id="chartButton`+number+`"><a onClick='displayChart(`+number+`)'>L`+(number+1)+`</a></li>
+    <li id="chartButton`+number+`"><a onClick='displayFrequencyChart(`+number+`)'>L`+(number+1)+`</a></li>
     `);
+}
 
-    charts.push(new Chart(
-        document.getElementById("chart"+number),
+const displayFrequencyChart = function(number)
+{
+    let frequency = frequencies[number];
+
+    // Transformation en fréquences affichables en graphique
+    let displayableFrequencies = [];
+    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+    for(let i=0; i<26; i++)
+        displayableFrequencies[i] = frequency[letters[i]];
+
+    // Remplissage du canva avec le graphique
+    new Chart(
+        document.querySelector("#chart"+number),
         {
             "type":"bar",
             "data":
@@ -56,7 +37,9 @@ const displayFrequencyChart = function(frequency, number)
                 "borderWidth":1}]
             },
             "options":{"scales":{"yAxes":[{"ticks":{"beginAtZero":true}}]}}
-        }));
+        });
+
+    displayChart(number);
 }
 
 const resetCharts = function()
