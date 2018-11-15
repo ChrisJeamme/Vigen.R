@@ -3,7 +3,7 @@ let text = "Le Lorem Ipsum est simplement du faux texte employé dans la composi
 const generateRandomKey = function (keyLength)
 {
     let key = "";
-    var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (let i=0; i<keyLength; i++)
     {
         key += letters.charAt(Math.floor(Math.random() * letters.length));
