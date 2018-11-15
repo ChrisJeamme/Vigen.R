@@ -34,7 +34,7 @@ window.onkeyup = function(e)
             document.querySelector('#attackResult').innerHTML = keyLength;
         }
     } 
-} 
+}  
 
 ///////////////////
 // Ecouteurs JBL //
