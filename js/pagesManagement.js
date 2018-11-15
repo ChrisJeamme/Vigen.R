@@ -146,8 +146,12 @@ const pageInitialisation = function()
             displayErrorColor("#attackTextArea");
         else
         {
-            let keyLength = findKeyLength(document.querySelector('#attackTextArea').value);
-            document.querySelector('#attackResult').innerHTML = keyLength;
+            let text = document.querySelector('#attackTextArea').value;
+            let keyLength = findKeyLength(text);
+            document.querySelector('#attackResult').innerHTML = "Clé de longueur "+keyLength;
+        
+            frequency(text,keyLength);
+        
         }
     }
 }
