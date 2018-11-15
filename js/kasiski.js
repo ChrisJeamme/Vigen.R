@@ -156,16 +156,14 @@ const canWeStop = function(array)
     return true;
 }
 
-
-
 const frequency = function(text, keyLength)
 {
-    // L1 (a faire automatiquement après pour chaque)
+    // Calcul des occurences
     let frequencies = [];
 
     for(let shift=0; shift<keyLength; shift++)
     {
-        let frequency = {};
+        let frequency = [];
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(
             (letter)=>{frequency[letter] = 0;});
     
@@ -177,5 +175,11 @@ const frequency = function(text, keyLength)
     }
     console.log(frequencies)
 
-    return "";
+    // TODO : passer en fréquences
+
+    // Affichage des graphiques
+    resetCharts();
+    frequencies.forEach(displayFrequencyChart);
+
+    return frequencies;
 }
