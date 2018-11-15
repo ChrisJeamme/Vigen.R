@@ -1,0 +1,10 @@
+.frequencyChart
+{
+    display: block;
+    height: 385px;
+    width: 20%;
+    border-radius: 5px ;
+    border: 2px solid #c8e0f0;
+    background-color: #ffffff;
+    margin: 10px;
+}
