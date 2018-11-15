@@ -155,3 +155,27 @@ const canWeStop = function(array)
     }
     return true;
 }
+
+
+
+const frequency = function(text, keyLength)
+{
+    // L1 (a faire automatiquement après pour chaque)
+    let frequencies = [];
+
+    for(let shift=0; shift<keyLength; shift++)
+    {
+        let frequency = {};
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(
+            (letter)=>{frequency[letter] = 0;});
+    
+        for(let i=shift; i<text.length; i+=keyLength)
+        {
+            frequency[text[i]]++;
+        }
+        frequencies.push(frequency);
+    }
+    console.log(frequencies)
+
+    return "";
+}
