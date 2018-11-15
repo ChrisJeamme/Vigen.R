@@ -1,4 +1,5 @@
-
+let frequencies;
+let frenchFrequency = [8.40, 7.13, 1.06, 5.26, 3.03, 3.01, 4.18, 0.99, 17.26, 6.55, 1.12, 8.08, 1.27, 7.07, 0.92, 5.74, 7.34, 1.32, 0.31, 0.04, 0.05, 0.45, 6.01, 0.30, 2.96, 0.12];
 
 // Trouve la longueur de la clé de cryptage
 const findKeyLength = function(message)
@@ -159,7 +160,7 @@ const canWeStop = function(array)
 const frequency = function(text, keyLength)
 {
     // Calcul des occurences
-    let frequencies = [];
+    frequencies = [];
 
     for(let shift=0; shift<keyLength; shift++)
     {
@@ -175,11 +176,11 @@ const frequency = function(text, keyLength)
     }
     console.log(frequencies)
 
-    // TODO : passer en fréquences
 
     // Affichage des graphiques
     resetCharts();
-    frequencies.forEach(displayFrequencyChart);
+    frequencies.forEach(createFrequencyChart);
+    
 
     return frequencies;
 }
