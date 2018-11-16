@@ -13,13 +13,13 @@ const createFrequencyChart = function(useless,number)
 
 const displayFrequencyChart = function(number)
 {
-    let frequency = frequencies[number];
+    let occurency = occurencies[number];
 
     // Transformation en fréquences affichables en graphique
-    let displayableFrequencies = [];
+    let displayableOccurencies = [];
     let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
     for(let i=0; i<26; i++)
-        displayableFrequencies[i] = frequency[letters[i]];
+        displayableOccurencies[i] = occurency[letters[i]];
 
     // Remplissage du canva avec le graphique
     new Chart(
@@ -30,7 +30,7 @@ const displayFrequencyChart = function(number)
             {
                 "labels":"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),
                 "datasets":[{"label":"Occurences pour L"+(number+1),
-                "data":displayableFrequencies,
+                "data":displayableOccurencies,
                 "fill":true,
                 "backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)","rgba(255, 99, 132, 0.2)"],
                 "borderColor":["rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)","rgb(255, 99, 132)"],
