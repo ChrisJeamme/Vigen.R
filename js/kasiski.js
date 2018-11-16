@@ -281,9 +281,11 @@ const shiftOne = function(array)
 		- IT = 0.0738
 		- SPA = 0.0770
 */
+
 const GetIndiceCorrelation = function(message) 
 {
-    message = message.replace(/[^a-z]/g, ""); 
+	
+    message = message.replace(/[^A-Z]/g, ""); 
     var probaLettres = new Array(26); // Stock le nb d'occurrences de chaque caracteres
     var nbChar=0;
 	var ic=0;
@@ -292,7 +294,7 @@ const GetIndiceCorrelation = function(message)
 	
     for(i=0; i<message.length; i++)
 	{
-        probaLettres[message.charCodeAt(i) - 97]++;
+        probaLettres[message.charCodeAt(i) - 65]++;
         nbChar++;
     }
     var sommeProba = 0;
