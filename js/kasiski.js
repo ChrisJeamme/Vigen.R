@@ -1,5 +1,6 @@
 let frequencies;
-let frenchFrequency = [8.40, 7.13, 1.06, 5.26, 3.03, 3.01, 4.18, 0.99, 17.26, 6.55, 1.12, 8.08, 1.27, 7.07, 0.92, 5.74, 7.34, 1.32, 0.31, 0.04, 0.05, 0.45, 6.01, 0.30, 2.96, 0.12];
+let occurencies;
+let frenchFrequency = [0.084, 0.0713, 0.0106, 0.0526, 0.0303, 0.0301, 0.0418, 0.0099, 0.1726, 0.0655, 0.0112, 0.0808, 0.0127, 0.0707, 0.0092, 0.0574, 0.0734, 0.0132, 0.0031, 0.0004, 0.0005, 0.0045, 0.0601, 0.0030, 0.0296, 0.0012];
 
 // Trouve la longueur de la clé de cryptage
 const findKeyLength = function(message)
@@ -157,30 +158,99 @@ const canWeStop = function(array)
     return true;
 }
 
+// Donne un tableau de tableau de fréquence pour chaque lettre de la clé
 const frequency = function(text, keyLength)
 {
     // Calcul des occurences
-    frequencies = [];
+    occurencies = [];
 
     for(let shift=0; shift<keyLength; shift++)
     {
-        let frequency = [];
+        let occurrency = [];
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(
-            (letter)=>{frequency[letter] = 0;});
+            (letter)=>{occurrency[letter] = 0;});
     
         for(let i=shift; i<text.length; i+=keyLength)
         {
-            frequency[text[i]]++;
+            occurrency[text[i]]++;
         }
-        frequencies.push(frequency);
+        occurencies.push(occurrency);
     }
-    console.log(frequencies)
-
+    console.log(occurencies)
 
     // Affichage des graphiques
     resetCharts();
-    frequencies.forEach(createFrequencyChart);
+    occurencies.forEach(createFrequencyChart);
     
+    // Transformation en fréquences
+
+    frequencies = [];
+    occurencies.forEach(
+        occurrency =>
+        {
+            let frequency = [];
+            let numberOfLetters = Object.keys(occurrency).length;
+
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach(
+                (letter)=>
+                {                    
+                    frequency.push(occurrency[letter]/numberOfLetters);
+                });
+            frequencies.push(frequency);
+        });
 
     return frequencies;
+}
+
+const findShiftLength = function()
+{
+    
+    frequencies.forEach(
+        frequency=>
+        {
+            let scores = [];
+            for(let i=0; i<26; i++)
+            {
+                console.log('Test avec '+shift(frequency,i));
+                scores.push(frequenceComparison(shift(frequency,i), frenchFrequency));
+                console.log('Résultat = '+scores[i]+'\n');
+            }
+            console.log(scores);
+        }
+    )
+
+}
+
+// Donne un score à la diférrence entre 2 tableaux de fréquence
+// Score minimum = 0
+// Score maximum (tableau de 26) = 26
+const frequenceComparison = function(frequence1, frequence2)
+{
+    let score = 26;
+
+    frequence1.forEach(
+        (freq1, i)=>
+        {
+            score -= Math.abs(frequence2[i]-freq1);
+            // console.log(Math.abs(frequence2[i]-freq1))
+        }
+    )
+    console.log(score);
+}
+
+// Décale un tableau vers la gauche shiftLength fois
+const shift = function(array, shiftLength)
+{
+    let array2 = JSON.parse(JSON.stringify(array));
+    let shift = shiftLength;
+    while(shift-->0)
+        array2 = shiftOne(array2);
+    return array2;
+}
+
+// Décale un tableau vers la gauche une fois
+const shiftOne = function(array)
+{
+    let array2 = JSON.parse(JSON.stringify(array));
+    return array2.splice(1).concat(array2[0]);
 }
