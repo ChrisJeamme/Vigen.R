@@ -202,40 +202,56 @@ const frequency = function(text, keyLength)
     return frequencies;
 }
 
-const findShiftLength = function()
-{
-    
+// Trouve le décalage de chaque lettre de la clé
+const findAllShift = function()
+{   
+    let shift = [];
+
     frequencies.forEach(
         frequency=>
         {
-            let scores = [];
-            for(let i=0; i<26; i++)
-            {
-                console.log('Test avec '+shift(frequency,i));
-                scores.push(frequenceComparison(shift(frequency,i), frenchFrequency));
-                console.log('Résultat = '+scores[i]+'\n');
-            }
-            console.log(scores);
-        }
-    )
+            let index = scoringTests(frequency);
 
+            shift.push(String.fromCharCode('A'.charCodeAt(0)+index));
+        }
+    );
+    return shift;
+}
+
+// Fais un scoring avec tous les décalages possibles et renvoi le décalage au plus haut score
+const scoringTests = function(frequency)
+{
+    let scores = [];
+    let max = 0;
+    let maxIndex = 0;
+
+    for(let i=0; i<26; i++)
+    {
+        let score = frequenceComparison(shift(frequency,i), frenchFrequency);
+        if(score > max)
+        {
+            max = score;
+            maxIndex = i;
+        }
+        scores.push(score);
+    }
+
+    console.log(scores);
+    return maxIndex;
 }
 
 // Donne un score à la diférrence entre 2 tableaux de fréquence
-// Score minimum = 0
-// Score maximum (tableau de 26) = 26
 const frequenceComparison = function(frequence1, frequence2)
 {
-    let score = 26;
-
+    let score = 0;
     frequence1.forEach(
         (freq1, i)=>
         {
-            score -= Math.abs(frequence2[i]-freq1);
+            score += Math.abs(frequence2[i]-freq1);
             // console.log(Math.abs(frequence2[i]-freq1))
         }
     )
-    console.log(score);
+    return 1/score;
 }
 
 // Décale un tableau vers la gauche shiftLength fois
