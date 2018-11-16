@@ -28,30 +28,16 @@ window.onkeyup = function(e)
         document.querySelector('#attackTextArea').innerHTML="KQOWE FVJPU JUUNU KGLME KJINM WUXFQ MKJBG WRLFN FGHUD WUUMB SVLPS NCMUE KQCTE SWREE KOYSS IWCTU AXYOT APXPL WPNTC GOJBG FQHTD WXIZA YGFFN SXCSE YNCTS SPNTU JNYTG GWZGR WUUNE JUUQE APYME KQHUI DUXFP GUYTS MTFFS HNUOC ZGMRU WEYTR GKMEE DCTVR ECFBD JQCUS WVBPN LGOYL SKMTE FVJJT WWMFM WPNME MTMHR SPXFS SKFFS TNUOC ZGMDO EOYEE KCPJR GPMUR SKHFR SEIUE VGOYC WXIZA YGOSA ANYDO EOYJL WUNHA MEBFE LXYVL WNOJN SIOFR WUCCE SWKVI DGMUC GOCRU WGNMA AFFVN SIUDE KQHCE UCPFC MPVSU DGAVE MNYMA MVLFM AOYFN TQCUA FVFJN XKLNE IWCWO DCCUL WRIFT WGMUS WOVMA TNYBU HTCOC WFYTN MGYTQ MKBBN LGFBT WOJFT WGNTE JKNEE DCLDH WTVBU VGFBI JG".replace(/ /g,'');
         // frequency("KQOWEFVJPUJUUNUKGLMEKJINMWUXFQMKJBGWRLFNFGHUDWUUMBSVLPSNCMUEKQCTESWREEKOYSSIWCTUAXYOTAPXPLWPNTCGOJBGFQHTDWXIZAYGFFNSXCSEYNCTSSPNTUJNYTGGWZGRWUUNEJUUQEAPYMEKQHUIDUXFPGUYTSMTFFSHNUOCZGMRUWEYTRGKMEEDCTVRECFBDJQCUSWVBPNLGOYLSKMTEFVJJTWWMFMWPNMEMTMHRSPXFSSKFFSTNUOCZGMDOEOYEEKCPJRGPMURSKHFRSEIUEVGOYCWXIZAYGOSAANYDOEOYJLWUNHAMEBFELXYVLWNOJNSIOFRWUCCESWKVIDGMUCGOCRUWGNMAAFFVNSIUDEKQHCEUCPFCMPVSUDGAVEMNYMAMVLFMAOYFNTQCUAFVFJNXKLNEIWCWODCCULWRIFTWGMUSWOVMATNYBUHTCOCWFYTNMGYTQMKBBNLGFBTWOJFTWGNTEJKNEEDCLDHWTVBUVGFBIJG",5);
         // Clé = SCUBA
+        clickOnAttack();
     } 
 }  
 
-///////////////////
-// Ecouteurs JBL //
-///////////////////
+////////////////
+// Ecouteurs  //
+////////////////
 
 const pageInitialisation = function()
 {
-
-    // Gestion activation boutons
-    // document.querySelector('#decodingKeyTextArea').onchange = 
-    // ()=>
-    // {
-    //     console.log('vide'+document.querySelector('#decodingKeyTextArea').value=="")
-    //     if(document.querySelector('#decodingTextArea').value!="")
-    //     {
-    //         if(document.querySelector('#decodingKeyTextArea').value=="")    
-    //             displayElement('#attackButton');
-    //         if(document.querySelector('#decodingKeyTextArea').value!="")    
-    //             hideElement('#attackButton');
-    //     }
-    // };
-
     // Gestion clic bouton encodage
     document.querySelector('#encodingMod').onclick =
     ()=>
@@ -74,86 +60,16 @@ const pageInitialisation = function()
     };})
 
     // Gestion clic bouton bombe
-    document.querySelector('#attackSectionButton').onclick =
-    ()=>
-    {
-        goToAttackingMenu();
-        
-        // Copie d'un éventuel contenu déjà saisie dans le menu de décodage
-        if(document.querySelector('#encodingTextArea').value == "")
-            displayErrorColor("#encodingTextArea");
-        else 
-            if(document.querySelector('#encodingKeyTextArea').value == "")
-                displayErrorColor("#encodingKeyTextArea");
-            else
-            {
-                document.querySelector('#decodingKeyTextArea').value = document.querySelector('#encodingKeyTextArea').value;
-                document.querySelector('#decodingTextArea').value = encoding(document.querySelector('#encodingTextArea').value, document.querySelector('#encodingKeyTextArea').value);
-            }
-    }
+    document.querySelector('#attackSectionButton').onclick = clickOnBomb;
     
     // Gestion clic bouton encodage
-    document.querySelector('#encodingButton').onclick =
-    ()=>
-    {
-        let textToEncode = document.querySelector('#encodingTextArea').value;
-        let keyForEncoding = document.querySelector('#encodingKeyTextArea').value;
-
-        if(textToEncode == "")
-            displayErrorColor("#encodingTextArea");
-        else 
-            if(keyForEncoding == "")
-                displayErrorColor("#encodingKeyTextArea");
-            else
-            {
-                textToEncode = messageTransformation(noAccent(textToEncode));
-                keyForEncoding = messageTransformation(noAccent(keyForEncoding));
-
-                // Mise en forme du message
-                document.querySelector('#encodingTextArea').value = textToEncode; 
-                // Mise en forme de la clé
-                document.querySelector('#encodingKeyTextArea').value = keyForEncoding; 
-                // Copie de la clé du coté décodage
-                document.querySelector('#decodingKeyTextArea').value = keyForEncoding;
-                // Décodage et ecriture du coté décodage
-                document.querySelector('#decodingTextArea').value = encoding(textToEncode, keyForEncoding);
-            }
-    }
+    document.querySelector('#encodingButton').onclick = clickOnEncodingButton;
 
     // Gestion clic bouton décodage
-    document.querySelector('#decodingButton').onclick =
-    ()=>
-    {
-        if(document.querySelector('#decodingTextArea').value == "")
-            displayErrorColor("#decodingTextArea");
-        else
-        {
-            if(document.querySelector('#decodingKeyTextArea').value == "")
-                displayErrorColor("#decodingKeyTextArea");
-            else
-            {
-                document.querySelector('#encodingKeyTextArea').value = document.querySelector('#decodingKeyTextArea').value;
-                document.querySelector('#encodingTextArea').value = decoding(document.querySelector('#decodingTextArea').value, document.querySelector('#decodingKeyTextArea').value);
-            }
-        }
-    }
+    document.querySelector('#decodingButton').onclick = clickOnDecodingButton;
 
     // Gestion clic bouton attaque
-    document.querySelector('#attackButton').onclick =
-    ()=>
-    {
-        if(document.querySelector('#attackTextArea').value == "")
-            displayErrorColor("#attackTextArea");
-        else
-        {
-            let text = document.querySelector('#attackTextArea').value;
-            let keyLength = findKeyLength(text);
-            document.querySelector('#attackResult').innerHTML = "Clé de longueur "+keyLength;
-        
-            frequency(text,keyLength);
-        
-        }
-    }
+    document.querySelector('#attackButton').onclick = clickOnAttack;
 }
 
 ///////////////////////
