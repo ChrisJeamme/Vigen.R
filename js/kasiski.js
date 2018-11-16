@@ -270,3 +270,41 @@ const shiftOne = function(array)
     let array2 = JSON.parse(JSON.stringify(array));
     return array2.splice(1).concat(array2[0]);
 }
+
+/*
+	Calcul l'indice de correlation d'un texte
+	input : texte
+	output : indice correlation
+		- FR = 0.0778
+		- EN = 0.0667
+		- GER = 0.0762
+		- IT = 0.0738
+		- SPA = 0.0770
+*/
+const GetIndiceCorrelation = function(message) 
+{
+    message = message.replace(/[^a-z]/g, ""); 
+    var probaLettres = new Array(26); // Stock le nb d'occurrences de chaque caracteres
+    var nbChar=0;
+	var ic=0;
+	
+    for(i=0; i<26; i++) probaLettres[i] = 0; // Init
+	
+    for(i=0; i<message.length; i++)
+	{
+        probaLettres[message.charCodeAt(i) - 97]++;
+        nbChar++;
+    }
+    var sommeProba = 0;
+    for(i=0; i<26; i++)
+	{
+		sommeProba = sommeProba + probaLettres[i]*(probaLettres[i]-1);
+	}
+	
+    ic = sommeProba / (nbChar*(nbChar-1));
+    
+	console.log("Indice correlation = " + ic);
+	console.log("Nombre de caracteres = " + nbChar);
+  	
+	return(ic);
+}
