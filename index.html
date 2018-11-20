@@ -9,13 +9,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
         <!-- Bulma Version 0.7.1-->
-        <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css" />
+        <link rel="stylesheet" href="lib/bulma/css/bulma.min.css" />
         <link rel="stylesheet" href="css/pages.css" />
         <link rel="stylesheet" href="css/particules-js.css" />
         <link rel="stylesheet" href="css/chart.css" />
     </head>
     <body>
         
+        <!-- Libraries -->
+        <script src="lib/chart.js/dist/Chart.min.js"></script>
+
         <!-- Scripts -->
         <script src="js/pagesManagement.js"></script>
         <script src="js/vigenere.js"></script>
@@ -24,9 +27,7 @@
         <script src="js/chartsManagement.js"></script>
         <script src="js/interactions.js"></script>
 
-        <script src="node_modules/moment/moment.js"></script>
-        <script src="node_modules/chart.js/dist/Chart.min.js"></script>
-        
+        <!-- Page -->
         <section class="hero is-bold is-info">
             <div id="particles-js"></div>
             <div class="hero-head"> <!-- Barre du haut -->
@@ -40,10 +41,6 @@
                         <div id="navbarMenu" class="navbar-menu">
                             <div class="navbar-end">
                                 <div class="tabs is-right">
-                                    <!-- <ul>
-                                        <li class="is-active"><a>Accueil</a></li>
-                                        <li><a href="">Aide</a></li>
-                                    </ul> -->
                                     <span class="navbar-item">
                                         <a class="button is-white is-outlined" href="https://github.com/ChrisJeamme/Vigen.R">
                                             <span class="icon">

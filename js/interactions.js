@@ -12,8 +12,6 @@ const clickOnAttack = function()
 
         document.querySelector('#attackResult').innerHTML = "Clé de longueur "+keyLength;
         document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
-
-
     }
 }
 
