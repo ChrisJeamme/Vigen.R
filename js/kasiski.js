@@ -12,19 +12,11 @@ const findKeyLength = function(message)
     
     while(cutSize > 2 && possibleKeyLengths.length !== 1 && numberOfIntersection<5)
     {
-        // console.log("cutSize = ", cutSize);
         let interestingSequences = {};
-        
         findRepetition(cutSize, message, interestingSequences, savedSequences);
-    
-        // console.log(sequences);
-        // console.log("Séquences intéréssantes = ");
-        // console.log(interestingSequences);
     
         for(seq in interestingSequences) //On parcourt les séquences intéressantes trouvées de cette longueur
         {
-            // console.log(seq);
-            // console.log("Longueur = "+interestingSequences[seq].index.length);
             interestingSequences[seq].indexSeparation = [];
     
             for(let i=0; i<interestingSequences[seq].index.length-1; i++)
@@ -32,8 +24,6 @@ const findKeyLength = function(message)
                 let seperationLength = interestingSequences[seq].index[i+1]-interestingSequences[seq].index[i];
                 interestingSequences[seq].indexSeparation.push(seperationLength);
             }
-
-            //console.log("Sépération des index = " + interestingSequences[seq].indexSeparation);
 
             interestingSequences[seq].indexSeparation.forEach(
                 (seperationLength)=>
@@ -44,26 +34,13 @@ const findKeyLength = function(message)
                     }
                     possibleKeyLengths = intersect(possibleKeyLengths, findDividers(seperationLength));
                     numberOfIntersection++;
-                    // addNewPossibleKeyLength(possibleKeyLengths, seperationLength);
-                    //console.log(possibleKeyLengths);
                 }
             )
         }
         cutSize--;
-        // console.log("SavedSequences :", savedSequences);
-        // console.log("possibleKeyLength :", possibleKeyLengths);
     }
-    // console.log("Longueur de la clé :", possibleKeyLengths[possibleKeyLengths.length-1]);
     return possibleKeyLengths[possibleKeyLengths.length-1];
 };
-
-// Ajoute (si pas déjà présent) un nombre et ses diviseurs à la liste des longueurs de clé possible
-const addNewPossibleKeyLength = function(possibleKeyLengths, seperationLength)
-{
-    let dividers = findDividers(seperationLength);
-
-    possibleKeyLengths = intersect(possibleKeyLengths, dividers); 
-}
 
 // Découpe le message et trouve les séquences qui se répètent
 const findRepetition = function(size, message, interestingSequences, savedSequences)
@@ -248,7 +225,6 @@ const frequenceComparison = function(frequence1, frequence2)
         (freq1, i)=>
         {
             score += Math.abs(frequence2[i]-freq1);
-            // console.log(Math.abs(frequence2[i]-freq1))
         }
     )
     return 1/score;
