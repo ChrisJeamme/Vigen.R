@@ -22,3 +22,34 @@
 {
     font-size: 3em;
 }
+
+#displaySequences
+{
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.seq0
+{
+    background-color: red;
+}
+
+.seq1
+{
+    background-color: purple;
+}
+
+.seq2
+{
+    background-color: blue;
+}
+
+.seq3
+{
+    background-color: green;
+}
+
+.seq4
+{
+    background-color: yellow;
+}
