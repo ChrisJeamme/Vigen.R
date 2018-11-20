@@ -20,8 +20,6 @@ const clickOnAttack = function()
         {
             document.querySelector('#attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
         }
-
-
     }
 }
 
