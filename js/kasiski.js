@@ -32,7 +32,14 @@ const findKeyLength = function(message)
                     {
                         possibleKeyLengths = findDividers(seperationLength);
                     }
-                    possibleKeyLengths = intersect(possibleKeyLengths, findDividers(seperationLength));
+                    let intersection = intersect(possibleKeyLengths, findDividers(seperationLength));
+                    if (intersection.length !== 0)
+                    {
+                        possibleKeyLengths = intersection;
+                    } else 
+                    {
+                        return possibleKeyLengths[possibleKeyLengths.length-1];
+                    }
                     numberOfIntersection++;
                 }
             )

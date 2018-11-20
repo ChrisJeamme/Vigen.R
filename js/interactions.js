@@ -7,11 +7,16 @@ const clickOnAttack = function()
         let text = document.querySelector('#attackTextArea').value;
         let keyLength = findKeyLength(text);
         
-        frequency(text,keyLength);
-        let shift = findAllShift();
-
-        document.querySelector('#attackResult').innerHTML = "Clé de longueur "+keyLength;
-        document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
+        if (keyLength !== undefined)
+        {
+            frequency(text,keyLength);
+            let shift = findAllShift();
+            document.querySelector('#attackResult').innerHTML = "longueur "+keyLength;
+            document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
+        } else 
+        {
+            document.querySelector('#attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
+        }
 
 
     }
