@@ -38,7 +38,10 @@ const findKeyLength = function(message)
                         possibleKeyLengths = intersection;
                     } else 
                     {
-                        return possibleKeyLengths[possibleKeyLengths.length-1];
+                        return {
+                            keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
+                            sequences: savedSequences
+                        };
                     }
                     numberOfIntersection++;
                 }
@@ -46,8 +49,30 @@ const findKeyLength = function(message)
         }
         cutSize--;
     }
-    return possibleKeyLengths[possibleKeyLengths.length-1];
+    return {
+        keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
+        sequences: savedSequences
+    };
 };
+
+const colorSequences = function(text, sequencesArray)
+{
+    // text = " "+text+" "; //Technique de siou, pour eviter que ça merde si on a une séquence au début
+    for (let i=0; i<sequencesArray.length; i++)
+    {
+        let sequence = sequencesArray[i];
+        let size = sequence.length;
+        for (let j=0; j<text.length-size; j++)
+        {
+            if (text.substring(j, j+size) === sequence)
+            {
+                text = text.substring(0,j) + '<span class="seq'+i+'">' + sequence + "</span>" + text.substring(j+size,text.length);
+                j+= 26 + size;
+            }
+        }
+    }
+    return text;
+}
 
 // Découpe le message et trouve les séquences qui se répètent
 const findRepetition = function(size, message, interestingSequences, savedSequences)

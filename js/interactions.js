@@ -5,13 +5,16 @@ const clickOnAttack = function()
     else
     {
         let text = document.querySelector('#attackTextArea').value;
-        let keyLength = findKeyLength(text);
+        let keyLength = findKeyLength(text).keyLength;
+        let sequences = findKeyLength(text).sequences;
         
         if (keyLength !== undefined)
         {
             frequency(text,keyLength);
             let shift = findAllShift();
-            document.querySelector('#attackResult').innerHTML = "longueur "+keyLength;
+            let textToDisplay = colorSequences(text, sequences);
+            document.querySelector('#displaySequences').innerHTML = textToDisplay;
+            document.querySelector('#attackResult').innerHTML = "Longueur de la clé : "+keyLength;
             document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
         } else 
         {
