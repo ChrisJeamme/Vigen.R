@@ -29,27 +29,37 @@
     text-align: left;
 }
 
-.seq0
+i 
 {
-    background-color: red;
+    font-style: normal;
 }
 
 .seq1
 {
-    background-color: purple;
+    background-color: red;
 }
 
 .seq2
 {
-    background-color: blue;
+    background-color: purple;
 }
 
 .seq3
 {
-    background-color: green;
+    background-color: blue;
 }
 
 .seq4
 {
+    background-color: green;
+}
+
+.seq5
+{
     background-color: yellow;
+}
+
+.seqx
+{
+    background-color: black;
 }

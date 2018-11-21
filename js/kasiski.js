@@ -58,7 +58,7 @@ const findKeyLength = function(message)
 
 const colorSequences = function(text, sequencesArray)
 {
-    // text = " "+text+" "; //Technique de siou, pour eviter que ça merde si on a une séquence au début
+    let saveColors = {};
     for (let i=0; i<sequencesArray.length; i++)
     {
         let sequence = sequencesArray[i];
@@ -67,12 +67,32 @@ const colorSequences = function(text, sequencesArray)
         {
             if (text.substring(j, j+size) === sequence)
             {
-                text = text.substring(0,j) + '<span class="seq'+i+'">' + sequence + "</span>" + text.substring(j+size,text.length);
-                j+= 26 + size;
+                for (let k=j; k<=j+size; k++)
+                {
+                    if (saveColors[k])
+                    {
+                        saveColors[k] = 'x'; //Chevauchement entre 2 facteurs
+                    }
+                    else 
+                    {
+                        saveColors[k] = i+1;
+                    }
+                }
             }
         }
     }
-    return text;
+    let newText = "";
+    for (let i=0; i<text.length; i++)
+    {
+        if (saveColors[i])
+        {
+            newText += '<i class="seq'+saveColors[i]+'">'+text.charAt(i)+'</i>';
+        } else 
+        {
+            newText += text.charAt(i);
+        }
+    }
+    return newText;
 }
 
 // Découpe le message et trouve les séquences qui se répètent
