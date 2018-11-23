@@ -67,7 +67,7 @@ const colorSequences = function(text, sequencesArray)
         {
             if (text.substring(j, j+size) === sequence)
             {
-                for (let k=j; k<=j+size; k++)
+                for (let k=j; k<j+size; k++)
                 {
                     if (saveColors[k])
                     {
