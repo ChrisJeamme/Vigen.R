@@ -8,13 +8,16 @@ const clickOnAttack = function()
         let result = findKeyLength(text);
         let keyLength = result.keyLength;
         let sequences = result.sequences;
+        let infos = result.factorsToDisplay;
         
         if (keyLength !== undefined)
         {
             frequency(text,keyLength);
             let shift = findAllShift();
             let textToDisplay = colorSequences(text, sequences);
+            let infosToDisplay = displayInfos(infos);
             document.querySelector('#displaySequences').innerHTML = textToDisplay;
+            document.querySelector('#showDetails').innerHTML = infosToDisplay;
             document.querySelector('#attackResult').innerHTML = "Longueur de la clé : "+keyLength;
             document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
         } else 

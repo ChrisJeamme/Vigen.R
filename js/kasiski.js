@@ -9,6 +9,7 @@ const findKeyLength = function(message)
     let cutSize = 30;
     let possibleKeyLengths = [];
     let savedSequences = [];
+    let sequencesToDisplay = [];
     let numberOfIntersection = 0;
     
     while(cutSize > 2 && possibleKeyLengths.length !== 1 && numberOfIntersection<5)
@@ -33,15 +34,22 @@ const findKeyLength = function(message)
                     {
                         possibleKeyLengths = findDividers(seperationLength);
                     }
-                    let intersection = intersect(possibleKeyLengths, findDividers(seperationLength));
+                    let dividers = findDividers(seperationLength);
+                    let intersection = intersect(possibleKeyLengths, dividers);
                     if (intersection.length !== 0)
                     {
+                        let newSeq = {};
+                        newSeq.name = seq
+                        newSeq.seperationLength = seperationLength;
+                        newSeq.dividers = dividers;
+                        sequencesToDisplay.push(newSeq);
                         possibleKeyLengths = intersection;
                     } else 
                     {
                         return {
                             keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
-                            sequences: savedSequences
+                            sequences: savedSequences,
+                            factorsToDisplay: sequencesToDisplay
                         };
                     }
                     numberOfIntersection++;
@@ -52,7 +60,8 @@ const findKeyLength = function(message)
     }
     return {
         keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
-        sequences: savedSequences
+        sequences: savedSequences,
+        factorsToDisplay: sequencesToDisplay
     };
 };
 
@@ -93,6 +102,34 @@ const colorSequences = function(text, sequencesArray)
         }
     }
     return newText;
+}
+
+const displayInfos = function(infos)
+{
+    let response = '<table class="table">\n'+
+                    '   <thead>'+
+                    '       <tr>'+
+                    '           <th>Facteur</th>'+
+                    '           <th>Distance</th>'+
+                    '           <th>Diviseurs possible</th>'+
+                    '       </tr>'+
+                    '   <thead>'+
+                    '   <tbody>';
+
+    for (let i=0; i<infos.length; i++)
+    {
+        response += '<tr>'+
+                    '   <td><i class="seq'+(i+1)+'">'+infos[i].name+'</i></td>'+
+                    '   <td>'+infos[i].seperationLength+'</td>'+
+                    '   <td>'+infos[i].dividers+'</td>'+
+                    '</tr>';
+    }
+
+    response += '   </tbody>'+
+                '</table>';
+
+    return response;
+
 }
 
 // Découpe le message et trouve les séquences qui se répètent
