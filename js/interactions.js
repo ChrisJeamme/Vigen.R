@@ -5,8 +5,9 @@ const clickOnAttack = function()
     else
     {
         let text = document.querySelector('#attackTextArea').value;
-        let keyLength = findKeyLength(text).keyLength;
-        let sequences = findKeyLength(text).sequences;
+        let result = findKeyLength(text);
+        let keyLength = result.keyLength;
+        let sequences = result.sequences;
         
         if (keyLength !== undefined)
         {
