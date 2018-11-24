@@ -106,27 +106,27 @@ const colorSequences = function(text, sequencesArray)
 
 const displayInfos = function(infos)
 {
-    let response = '<table class="table">\n'+
-                    '   <thead>'+
-                    '       <tr>'+
-                    '           <th>Facteur</th>'+
-                    '           <th>Distance</th>'+
-                    '           <th>Diviseurs possible</th>'+
-                    '       </tr>'+
-                    '   <thead>'+
-                    '   <tbody>';
+    let response = `<table class="table">
+                      <thead>
+                          <tr>
+                              <th>Facteur</th>
+                              <th>Distance</th>
+                              <th>Diviseurs possible</th>
+                          </tr>
+                       <thead>
+                       <tbody>`;
 
     for (let i=0; i<infos.length; i++)
     {
-        response += '<tr>'+
-                    '   <td><i class="seq'+(i+1)+'">'+infos[i].name+'</i></td>'+
-                    '   <td>'+infos[i].seperationLength+'</td>'+
-                    '   <td>'+infos[i].dividers+'</td>'+
-                    '</tr>';
+        response += `<tr>
+                       <td><i class="seq`+(i+1)+`">`+infos[i].name+`</i></td>
+                       <td>`+infos[i].seperationLength+`</td>
+                       <td>`+infos[i].dividers+`</td>
+                    </tr>`;
     }
 
-    response += '   </tbody>'+
-                '</table>';
+    response += `   </tbody>
+                </table>`;
 
     return response;
 
