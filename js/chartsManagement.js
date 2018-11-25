@@ -7,7 +7,7 @@ const createFrequencyChart = function(useless,number)
 
     // Ajout d'un bouton pour le graphique
     document.querySelector('#chartMenu').innerHTML=document.querySelector('#chartMenu').innerHTML.concat(`
-    <li id="chartButton`+number+`"><a onClick='displayFrequencyChart(`+number+`)'>L`+(number+1)+`</a></li>
+    <li id="chartButton`+number+`"><a class="button is-link is-rounded" style="margin: 1px;" onClick='displayFrequencyChart(`+number+`)'>L`+(number+1)+`</a></li>
     `);
 }
 
@@ -68,7 +68,6 @@ const displayFrequencyChart = function(number)
 const resetCharts = function()
 {
     document.querySelector('#charts').innerHTML = `
-    <h2 class="is-title is-2">Graphiques de fréquence</h2>
     <div class="tabs is-centered is-large is-boxed">
         <ul id="chartMenu">
         </ul>

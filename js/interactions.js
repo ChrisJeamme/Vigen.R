@@ -5,17 +5,26 @@ const clickOnAttack = function()
     else
     {
         let text = document.querySelector('#attackTextArea').value;
-        let keyLength = findKeyLength(text).keyLength;
-        let sequences = findKeyLength(text).sequences;
+        let result = findKeyLength(text);
+        let keyLength = result.keyLength;
+        let sequences = result.sequences;
+        let infos = result.factorsToDisplay;
         
         if (keyLength !== undefined)
         {
             frequency(text,keyLength);
             let shift = findAllShift();
             let textToDisplay = colorSequences(text, sequences);
+            let infosToDisplay = displayInfos(infos);
+
+            document.querySelector('#results').classList.remove('hide');
             document.querySelector('#displaySequences').innerHTML = textToDisplay;
-            document.querySelector('#attackResult').innerHTML = "Longueur de la clé : "+keyLength;
-            document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
+            document.querySelector('#showDetails').innerHTML = infosToDisplay;
+            document.querySelector('#attackResult').innerHTML = keyLength;
+            document.querySelector('#keyFound').innerHTML = shift.join(' ');
+
+            document.querySelector('#decodedMessage').innerHTML = decoding(text, shift.join(''));
+
         } else 
         {
             document.querySelector('#attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
