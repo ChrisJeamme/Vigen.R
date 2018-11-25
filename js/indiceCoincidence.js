@@ -1,4 +1,5 @@
-function GetIndiceCorrelation(message) 
+function GetIndiceCoincidence(message) 
+
 {
     message = message.replace(/[^A-Z]/g, ""); 
     var probaLettres = new Array(26);
@@ -47,7 +48,7 @@ function getIndicesCoincidences(taillesCle, texte)
     
     for(j = 0 ; j < taillesCle[i] ; j++) 
     {
-      sommesICs += GetIndiceCorrelation(subChaines[j]);
+      sommesICs += GetIndiceCoincidence(subChaines[j]);
       //console.log("Sub-chaine " + i + " : " + subChaines[j]);
     }
     
@@ -56,6 +57,26 @@ function getIndicesCoincidences(taillesCle, texte)
   }
   
   return ICs;
+}
+
+function getLongueurCleIC(texte)
+{
+	var seuil = 0.06;
+	var longueurTrouvee = false;
+	var i = 1;
+	var ics;
+	
+	while(!longueurTrouvee)
+	{
+		ics = getIndicesCoincidences([i], texte);
+		if(ics[0] >= seuil)
+		{
+			longueurTrouvee = true;
+			return i;
+		}
+		else
+			i++;
+	}	
 }
 
 // test avec texte victor hugo https://www.etudes-litteraires.com/forum/topic23904-les-plus-beaux-textes-de-la-litterature-francaise.html
