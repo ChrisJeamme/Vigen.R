@@ -60,7 +60,7 @@ const pageInitialisation = function()
     };})
 
     // Gestion clic bouton bombe
-    document.querySelector('#attackSectionButton').onclick = clickOnBomb;
+    // document.querySelector('#attackSectionButton').onclick = clickOnBomb;
     
     // Gestion clic bouton encodage
     document.querySelector('#encodingButton').onclick = clickOnEncodingButton;
@@ -109,6 +109,7 @@ const goToMainMenu = function()
     // Cache le menu actuellement ouvert
     hideElement("#encodingSection");
     hideElement("#attackSection");
+    hideElement("#results");
 
     // Affichage des boutons du menu 
     displayElement("#encodingMod");

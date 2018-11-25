@@ -31,7 +31,7 @@
         <script src="js/interactions.js"></script>
 
         <!-- Page -->
-        <section class="hero is-bold is-info">
+        <section class="hero is-bold is-info is-fullheight">
             <div id="particles-js"></div>
             <div class="hero-head"> <!-- Barre du haut -->
                 <nav class="navbar">
@@ -70,44 +70,55 @@
                     <div id="encodingSection" class="hide"> <!-- Partie Encodage / Décodage -->
                         <button class="closeMod button is-large is-danger is-rounded" hidden>Retour</button> <!-- Bouton de fermeture du mode -->
 
-                        <div class="columns">
-                            <div class="column">
-                                <h1 class="title">
-                                    Message clair
-                                </h1>
-                                <h2 class="subtitle">
-                                    Tapez votre message à coder
-                                </h2>
-                                <textarea id="encodingTextArea" class="textarea" placeholder="Message à coder"></textarea>
 
-                                <br />
-                                <h2 class="subtitle">
-                                    Tapez votre clé secrète
-                                </h2>
-                                <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
+                        <div class="tile is-ancestor">
+                            <div class="tile is-vertical is-8">
+                                <div class="tile">
+                                    <div class="tile is-parent is-vertical">
+                                        <article class="tile is-child notification is-info">
+                                            <h1 class="title">
+                                                Message clair
+                                            </h1>
+                                            <h2 class="subtitle">
+                                                Tapez votre message à coder
+                                            </h2>
+                                            <textarea id="encodingTextArea" class="textarea" placeholder="Message à coder"></textarea>
+                                            <br />
+                                            <h2 class="subtitle">
+                                                Tapez votre clé secrète
+                                            </h2>
+                                            <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
+                                        </article>
+                                    </div>
+                                    <div class="tile is-parent">
+                                        <article class="tile is-child notification is-info is-inline-flex" style="flex-direction: column; justify-content: center;">
+                                            <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
+                                            <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
+                                        </article>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="column is-inline-flex" style="flex-direction: column; justify-content: center;">
-                                <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
-                                <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
-                               </div>
-                            <div class="column">
-                                <h1 class="title">
-                                    Message chiffré
-                                </h1>
-                                <h2 class="subtitle">
-                                    Tapez votre message à décoder
-                                </h2>
-                                <textarea id="decodingTextArea" class="textarea" placeholder="Message à décoder"></textarea>
-                                
-                                <br />
-                                <h2 class="subtitle">
-                                    Tapez votre clé secrète
-                                </h2>
-                                <textarea id="decodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
+                            <div class="tile is-parent is-vertical">
+                                <article class="tile is-child notification is-info">
+                                    <h1 class="title">
+                                        Message chiffré
+                                    </h1>
+                                    <h2 class="subtitle">
+                                        Tapez votre message à décoder
+                                    </h2>
+                                    <textarea id="decodingTextArea" class="textarea" placeholder="Message à décoder"></textarea>
+
+                                    <br />
+                                    <h2 class="subtitle">
+                                        Tapez votre clé secrète
+                                    </h2>
+                                    <textarea id="decodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
+                                </article>
                             </div>
                         </div>
+                        
 
-                        <button id="attackSectionButton" class="button is-rounded is-danger is-large"><!-- <i class="fa fa-angle-double-left"></i> --><i class="fa fa-bomb m-5"></i></button>                        
+                        <!-- <button id="attackSectionButton" class="button is-rounded is-danger is-large"><i class="fa fa-bomb m-5"></i></button>                         -->
                     </div>
 
                     <div id="attackSection" class="hide"> <!-- Partie Attaque -->
@@ -124,28 +135,78 @@
                         <textarea id="attackTextArea" class="textarea" placeholder="Chiffré à attaquer"></textarea>
                         
                         <br />
-                        <button id="attackButton" class="button is-large is-danger is-rounded" hidden>Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
+                        <button id="attackButton" class="button is-large is-primary is-rounded" hidden>Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
 
                         <br />
-                        <div id="displaySequences"></div>
-                        <div id="showDetails"></div>
-                        <div id="attackResult"></div>
-                        <div id="charts"></div>
+                        <br />
 
                     </div>
 
                 </div>
             </div>
-        </section>
-        <footer class="footer"> <!-- Barre du bas -->
-            <div class="container">
-                <div class="content has-text-centered">
-                    <button class="button" disabled>
-                        Project Team of the Dungeon Quest
-                    </button>
-                </div>
+            <div id="results" class="hide"> <!-- Partie Résultat d'attaque -->
+                <section class="hero is-primary">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Séquences répétés trouvés
+                        </h1>
+                        <div id="displaySequences" class="box"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero is-link">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Longueurs de clés possibles
+                        </h1>
+                        <div id="showDetails"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero is-danger">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Longueur de la clé
+                        </h1>
+                        <div id="attackResult"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero is-info">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Graphiques de fréquences de la clé
+                        </h1>
+                        <div id="charts"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero is-link is-bold">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Clé analysé
+                        </h1>
+                        <div id="keyFound"></div>
+                        </div>
+                    </div>
+                </section>
+                <section class="hero is-primary">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Message décodé
+                        </h1>
+                        <textarea id="decodedMessage" class="textarea"></textarea>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </footer>
+        </section>
 
         <!-- Librairie Particules.js -->
         <script src="lib/particules.js/particules-js-base.js"></script>

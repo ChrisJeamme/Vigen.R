@@ -106,7 +106,7 @@ const colorSequences = function(text, sequencesArray)
 
 const displayInfos = function(infos)
 {
-    let response = `<table class="table">
+    let response = `<table class="table is-fullwidth box">
                       <thead>
                           <tr>
                               <th>Facteur</th>
