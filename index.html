@@ -71,7 +71,7 @@
                         <button class="closeMod button is-large is-danger is-rounded" hidden>Retour</button> <!-- Bouton de fermeture du mode -->
 
 
-                        <div class="tile is-ancestor">
+                        <!-- <div class="tile is-ancestor">
                             <div class="tile is-vertical is-8">
                                 <div class="tile">
                                     <div class="tile is-parent is-vertical">
@@ -115,7 +115,44 @@
                                     <textarea id="decodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
                                 </article>
                             </div>
-                        </div>
+                        </div> -->
+
+                        <div class="columns">
+                            <div class="column">
+                                <h1 class="title">
+                                    Message clair
+                                </h1>
+                                <h2 class="subtitle">
+                                    Tapez votre message à coder
+                                </h2>
+                                <textarea id="encodingTextArea" class="textarea" placeholder="Message à coder"></textarea>
+
+                                <br />
+                                <h2 class="subtitle">
+                                    Tapez votre clé secrète
+                                </h2>
+                                <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
+                            </div>
+                            <div class="column is-inline-flex" style="flex-direction: column; justify-content: center;">
+                                <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
+                                <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
+                               </div>
+                            <div class="column">
+                                <h1 class="title">
+                                    Message chiffré
+                                </h1>
+                                <h2 class="subtitle">
+                                    Tapez votre message à décoder
+                                </h2>
+                                <textarea id="decodingTextArea" class="textarea" placeholder="Message à décoder"></textarea>
+                                
+                                <br />
+                                <h2 class="subtitle">
+                                    Tapez votre clé secrète
+                                </h2>
+                                <textarea id="decodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
+                            </div>
+</div>
                         
 
                         <!-- <button id="attackSectionButton" class="button is-rounded is-danger is-large"><i class="fa fa-bomb m-5"></i></button>                         -->

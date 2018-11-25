@@ -74,6 +74,11 @@ table
     background-color: none;
 }
 
+.textarea
+{
+    margin: 0;
+}
+
 /* #results, #results .title
 {
     color: #363636;
