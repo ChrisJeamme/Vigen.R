@@ -51,16 +51,28 @@ const clickOnBomb = function()
 
 const clickOnDecodingButton = function()
 {
-    if(document.querySelector('#decodingTextArea').value == "")
+    let textToDecode = document.querySelector('#decodingTextArea').value;
+    let keyForDecoding = document.querySelector('#decodingKeyTextArea').value;
+
+    if(textToDecode == "")
         displayErrorColor("#decodingTextArea");
     else
     {
-        if(document.querySelector('#decodingKeyTextArea').value == "")
+        if(keyForDecoding == "")
             displayErrorColor("#decodingKeyTextArea");
         else
         {
-            document.querySelector('#encodingKeyTextArea').value = document.querySelector('#decodingKeyTextArea').value;
-            document.querySelector('#encodingTextArea').value = decoding(document.querySelector('#decodingTextArea').value, document.querySelector('#decodingKeyTextArea').value);
+            textToDecode = messageTransformation(noAccent(textToDecode));
+            keyForDecoding = messageTransformation(noAccent(keyForDecoding));
+
+            // Mise en forme du message
+            document.querySelector('#decodingTextArea').value = textToDecode; 
+            // Mise en forme de la clé
+            document.querySelector('#decodingKeyTextArea').value = keyForDecoding; 
+            // Copie de la clé du coté encodage
+            document.querySelector('#encodingKeyTextArea').value = keyForDecoding;
+            // Décodage et ecriture du coté encodage
+            document.querySelector('#encodingTextArea').value = decoding(textToDecode, keyForDecoding);
         }
     }
 }
