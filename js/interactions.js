@@ -10,7 +10,6 @@ const clickOnAttack = function()
 
         let result = findKeyLength(text);
         let keyLength = result.keyLength;
-        let sequences = result.sequences;
         let infos = result.factorsToDisplay;
 		
 		//IC
@@ -20,7 +19,7 @@ const clickOnAttack = function()
         {
             frequency(text,keyLength);
             let shift = findAllShift();
-            let textToDisplay = colorSequences(text, sequences);
+            let textToDisplay = colorSequences(text, infos);
             let infosToDisplay = displayInfos(infos);
 
             document.querySelector('#results').classList.remove('hide');

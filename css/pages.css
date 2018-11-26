@@ -36,37 +36,42 @@
 
 i 
 {
-    color: white;
     font-style: normal;
 }
 
 .seq1
 {
+    color: white;
     background-color: red;
 }
 
 .seq2
 {
+    color: white;
     background-color: purple;
 }
 
 .seq3
 {
+    color: white;
     background-color: blue;
 }
 
 .seq4
 {
+    color: white;
     background-color: green;
 }
 
 .seq5
 {
+    color: white;
     background-color: orange;
 }
 
 .seqx
 {
+    color: white;
     background-color: black;
 }
 

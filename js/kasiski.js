@@ -38,7 +38,7 @@ const findKeyLength = function(message)
                     }
                     let dividers = findDividers(seperationLength);
                     let intersection = intersect(possibleKeyLengths, dividers);
-                    if (intersection.length !== 0)
+                    if (intersection.length !== 0 && numberOfIntersection<5)
                     {
                         let newSeq = {};
                         newSeq.name = seq
@@ -46,15 +46,14 @@ const findKeyLength = function(message)
                         newSeq.dividers = dividers;
                         sequencesToDisplay.push(newSeq);
                         possibleKeyLengths = intersection;
+                        numberOfIntersection++;
                     } else 
                     {
                         return {
                             keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
-                            sequences: savedSequences,
                             factorsToDisplay: sequencesToDisplay
                         };
                     }
-                    numberOfIntersection++;
                 }
             )
         }
@@ -62,7 +61,6 @@ const findKeyLength = function(message)
     }
     return {
         keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
-        sequences: savedSequences,
         factorsToDisplay: sequencesToDisplay
     };
 };
@@ -72,7 +70,7 @@ const colorSequences = function(text, sequencesArray)
     let saveColors = {};
     for (let i=0; i<sequencesArray.length; i++)
     {
-        let sequence = sequencesArray[i];
+        let sequence = sequencesArray[i].name;
         let size = sequence.length;
         for (let j=0; j<text.length-size; j++)
         {
