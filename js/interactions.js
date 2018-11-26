@@ -4,7 +4,7 @@ const clickOnAttack = function()
         displayErrorColor("#attackTextArea");
     else
     {
-        let text = document.querySelector('#attackTextArea').value;
+        let text = messageTransformation(noAccent(document.querySelector('#attackTextArea').value));
         let result = findKeyLength(text);
         let keyLength = result.keyLength;
         let sequences = result.sequences;
