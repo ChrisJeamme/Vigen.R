@@ -1,7 +1,9 @@
 let frequencies;
 let occurencies;
-let frenchFrequency = [0.0840, 0.0106, 0.0302, 0.0418, 0.1726, 0.0112, 0.0127, 0.0092, 0.0733, 0.0031, 0.0005, 0.0601, 0.0296, 0.0713, 0.0526, 0.0301, 0.0098, 0.0655, 0.0808, 0.0707, 0.0574, 0.0132, 0.0004, 0.0045, 0.003, 0.0012]
-let englishFrequency = [0.0812, 0.0149, 0.0271, 0.0432, 0.1202, 0.0230, 0.0203, 0.0592, 0.0731, 0.001, 0.0069, 0.0398, 0.0261, 0.0695, 0.0768, 0.0182, 0.0011, 0.0602, 0.0628, 0.0910, 0.0288, 0.0111, 0.0209, 0.0017, 0.0211, 0.0007]
+let frenchFrequency = [0.0840, 0.0106, 0.0302, 0.0418, 0.1726, 0.0112, 0.0127, 0.0092, 0.0733, 0.0031, 0.0005, 0.0601, 0.0296, 0.0713, 0.0526, 0.0301, 0.0098, 0.0655, 0.0808, 0.0707, 0.0574, 0.0132, 0.0004, 0.0045, 0.003, 0.0012];
+let englishFrequency = [0.0812, 0.0149, 0.0271, 0.0432, 0.1202, 0.0230, 0.0203, 0.0592, 0.0731, 0.001, 0.0069, 0.0398, 0.0261, 0.0695, 0.0768, 0.0182, 0.0011, 0.0602, 0.0628, 0.0910, 0.0288, 0.0111, 0.0209, 0.0017, 0.0211, 0.0007];
+let spanishFrequency = [0.1230, 0.0103, 0.0449, 0.0504, 0.1369, 0.0077, 0.0104, 0.0065, 0.0778, 0.0028, 0.0002, 0.0584, 0.0284, 0.0741, 0.0868, 0.0263, 0.0102, 0.0644, 0.0697, 0.0482, 0.0399, 0.0104, 0.0002, 0.0016, 0.0066, 0.0034];
+let germanFrequency = [0.0628, 0.0199, 0.0298, 0.0504, 0.1692, 0.0162, 0.0312, 0.0451, 0.0742, 0.0030, 0.0146, 0.0356, 0.0254, 0.1020, 0.0287, 0.0077, 0.0002, 0.0744, 0.0662, 0.0595, 0.0439, 0.0107, 0.0152, 0.0003, 0.0010, 0.0124];
 
 // Trouve la longueur de la clé de cryptage
 const findKeyLength = function(message)
@@ -192,11 +194,6 @@ const findDividers = function(integer)
     return dividers;
 };
 
-const isPrimeNumber = function(integer)
-{
-    return findDividers(integer).length==1;
-};
-
 const intersect = function(array1, array2)
 {
     let inter = array1.filter(value => {
@@ -206,23 +203,6 @@ const intersect = function(array1, array2)
         return array1;
     else 
         return inter;
-}
-
-const canWeStop = function(array)
-{
-    if (array.length === 0)
-    {
-        return false;
-    }
-    let last = array[array.length-1];
-    for (let i=0; i<array.length-1; i++)
-    {
-        if (last % array[i] !== 0)
-        {
-            return false;
-        }
-    }
-    return true;
 }
 
 // Donne un tableau de tableau de fréquence pour chaque lettre de la clé
