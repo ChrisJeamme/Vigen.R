@@ -18,19 +18,31 @@ const clickOnAttack = function()
         if (keyLength !== undefined)
         {
             frequency(text,keyLength);
-            let shift = findAllShift();
+
+            let matchingLanguage = scoringLanguages();
+            console.log("Langue la plus plausible = "+matchingLanguage);
+
+            let shiftMatchingLanguage = findAllShift(languages[languagesNames.indexOf(matchingLanguage)]);
+            let shiftFR = findAllShift(frenchFrequency);
+            // let shiftEN = findAllShift(englishFrequency);
+            // let shiftES = findAllShift(spanishFrequency);
+            // let shiftGER = findAllShift(germanFrequency);
+            
+            let shift = shiftFR; // Selection ici du language utilisé pour la cryptanalyse : shiftMatchingLanguage / shiftFR / shiftEN / shiftES / shiftGER
+
             let textToDisplay = colorSequences(text, infos);
             let infosToDisplay = displayInfos(infos);
 
             document.querySelector('#results').classList.remove('hide');
             document.querySelector('#displaySequences').innerHTML = textToDisplay;
             document.querySelector('#showDetails').innerHTML = infosToDisplay;
+            document.querySelector('#languageDetails').innerHTML = matchingLanguage;
             document.querySelector('#attackResult').innerHTML = "<strong>Kasiski : </strong>" + keyLength;
 			document.querySelector('#attackResultIC').innerHTML = "<strong>IC : </strong>" + keyLengthIC[0] + " (" + Math.round(keyLengthIC[1]*1000)/1000 + ")";
 			
             document.querySelector('#keyFound').innerHTML = shift.join(' ');
 
-            document.querySelector('#decodedMessage').innerHTML = decoding(text, shift.join(''));
+            document.querySelector('#decodedMessage').innerHTML = decoding(text,shift.join(''));
 
         } else 
         {

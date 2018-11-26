@@ -1,9 +1,12 @@
 let frequencies;
 let occurencies;
-let frenchFrequency = [0.0840, 0.0106, 0.0302, 0.0418, 0.1726, 0.0112, 0.0127, 0.0092, 0.0733, 0.0031, 0.0005, 0.0601, 0.0296, 0.0713, 0.0526, 0.0301, 0.0098, 0.0655, 0.0808, 0.0707, 0.0574, 0.0132, 0.0004, 0.0045, 0.003, 0.0012];
-let englishFrequency = [0.0812, 0.0149, 0.0271, 0.0432, 0.1202, 0.0230, 0.0203, 0.0592, 0.0731, 0.001, 0.0069, 0.0398, 0.0261, 0.0695, 0.0768, 0.0182, 0.0011, 0.0602, 0.0628, 0.0910, 0.0288, 0.0111, 0.0209, 0.0017, 0.0211, 0.0007];
-let spanishFrequency = [0.1230, 0.0103, 0.0449, 0.0504, 0.1369, 0.0077, 0.0104, 0.0065, 0.0778, 0.0028, 0.0002, 0.0584, 0.0284, 0.0741, 0.0868, 0.0263, 0.0102, 0.0644, 0.0697, 0.0482, 0.0399, 0.0104, 0.0002, 0.0016, 0.0066, 0.0034];
-let germanFrequency = [0.0628, 0.0199, 0.0298, 0.0504, 0.1692, 0.0162, 0.0312, 0.0451, 0.0742, 0.0030, 0.0146, 0.0356, 0.0254, 0.1020, 0.0287, 0.0077, 0.0002, 0.0744, 0.0662, 0.0595, 0.0439, 0.0107, 0.0152, 0.0003, 0.0010, 0.0124];
+let frenchFrequency =  [0.0840, 0.0106, 0.0302, 0.0418, 0.1726, 0.0112, 0.0127, 0.0092, 0.0733, 0.0031, 0.0005, 0.0601, 0.0296, 0.0713, 0.0526, 0.0301, 0.0098, 0.0655, 0.0808, 0.0707, 0.0574, 0.0132, 0.0004, 0.0045, 0.003 , 0.0012]; 
+let englishFrequency = [0.0812, 0.0149, 0.0271, 0.0432, 0.1202, 0.0230, 0.0203, 0.0592, 0.0731, 0.001 , 0.0069, 0.0398, 0.0261, 0.0695, 0.0768, 0.0182, 0.0011, 0.0602, 0.0628, 0.0910, 0.0288, 0.0111, 0.0209, 0.0017, 0.0211, 0.0007];
+let spanishFrequency = [0.1230, 0.0103, 0.0449, 0.0504, 0.1369, 0.0077, 0.0104, 0.0065, 0.0778, 0.0028, 0.0002, 0.0584, 0.0284, 0.0741, 0.0868, 0.0263, 0.0102, 0.0644, 0.0697, 0.0482, 0.0399, 0.0104, 0.0002, 0.0016, 0.0066, 0.0034]; 
+let germanFrequency =  [0.0628, 0.0199, 0.0298, 0.0504, 0.1692, 0.0162, 0.0312, 0.0451, 0.0742, 0.0030, 0.0146, 0.0356, 0.0254, 0.1020, 0.0287, 0.0077, 0.0002, 0.0744, 0.0662, 0.0595, 0.0439, 0.0107, 0.0152, 0.0003, 0.0010, 0.0124];
+let languages = [frenchFrequency, englishFrequency, spanishFrequency, germanFrequency];
+let languagesNames = ["Français", "Anglais", "Espagnol", "Allemand"];
+
 
 // Trouve la longueur de la clé de cryptage
 const findKeyLength = function(message)
@@ -221,7 +224,8 @@ const frequency = function(text, keyLength)
         }
         occurencies.push(occurrency);
     }
-    console.log(occurencies)
+    console.log("Occurences pour chaque L :");
+    console.log(occurencies);
 
     // Affichage des graphiques
     resetCharts();
@@ -247,15 +251,37 @@ const frequency = function(text, keyLength)
     return frequencies;
 }
 
-// Trouve le décalage de chaque lettre de la clé
-const findAllShift = function()
+// Scoring des langues
+const scoringLanguages = function()
 {   
+    let scoreLanguages = [];
+    languages.forEach((languageFreq, index)=>
+    {
+        let score = [];
+        frequencies.forEach(
+            frequency=>
+                score.push(frequenceComparison(frequency, languageFreq))
+        );
+        scoreLanguages[index] = score.reduce((a,b)=>(a+b),0);
+    });
+
+    // Affichage
+    for(let i=0; i<scoreLanguages.length; i++)
+        console.log(languagesNames[i] + " = " + scoreLanguages[i]);
+
+    // Renvoit du plus haut score
+    return languagesNames[scoreLanguages.indexOf(Math.max(...scoreLanguages))];
+}
+
+// Trouve le décalage de chaque lettre de la clé
+const findAllShift = function(language)
+{
     let shift = [];
 
     frequencies.forEach(
         frequency=>
         {
-            let index = scoringTests(frequency);
+            let index = scoringTests(frequency, language);
 
             shift.push(String.fromCharCode('A'.charCodeAt(0)+index));
         }
@@ -264,7 +290,7 @@ const findAllShift = function()
 }
 
 // Fais un scoring avec tous les décalages possibles et renvoi le décalage au plus haut score
-const scoringTests = function(frequency)
+const scoringTests = function(frequency, language)
 {
     let scores = [];
     let max = 0;
@@ -272,7 +298,7 @@ const scoringTests = function(frequency)
 
     for(let i=0; i<26; i++)
     {
-        let score = frequenceComparison(shift(frequency,i), frenchFrequency);
+        let score = frequenceComparison(shift(frequency,i), language);
         if(score > max)
         {
             max = score;
@@ -281,21 +307,26 @@ const scoringTests = function(frequency)
         scores.push(score);
     }
 
-    console.log(scores);
+    // console.log(scores);
     return maxIndex;
 }
 
 // Donne un score à la diférrence entre 2 tableaux de fréquence
 const frequenceComparison = function(frequence1, frequence2)
 {
-    let score = 0;
-    frequence1.forEach(
-        (freq1, i)=>
-        {
-            score += Math.abs(frequence2[i]-freq1);
-        }
-    )
-    return 1/score;
+    if(frequence2 != undefined && frequence1 != undefined)
+    {
+        let score = 0;
+        frequence1.forEach(
+            (freq1, i)=>
+            {
+                score += Math.abs(frequence2[i]-freq1);
+            }
+        )
+        return 1/score;
+    }
+
+    return -1;
 }
 
 // Décale un tableau vers la gauche shiftLength fois
