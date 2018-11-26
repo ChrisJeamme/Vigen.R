@@ -4,11 +4,16 @@ const clickOnAttack = function()
         displayErrorColor("#attackTextArea");
     else
     {
+		
         let text = document.querySelector('#attackTextArea').value;
+		//Kasiski
         let result = findKeyLength(text);
         let keyLength = result.keyLength;
         let sequences = result.sequences;
         let infos = result.factorsToDisplay;
+		
+		//IC
+		let keyLengthIC = getLongueurCleIC(text);
         
         if (keyLength !== undefined)
         {
@@ -20,7 +25,9 @@ const clickOnAttack = function()
             document.querySelector('#results').classList.remove('hide');
             document.querySelector('#displaySequences').innerHTML = textToDisplay;
             document.querySelector('#showDetails').innerHTML = infosToDisplay;
-            document.querySelector('#attackResult').innerHTML = keyLength;
+            document.querySelector('#attackResult').innerHTML = "Kasiski : " + keyLength;
+			document.querySelector('#attackResultIC').innerHTML = "IC : " + keyLengthIC[0] + " (" + Math.round(keyLengthIC[1]*1000)/1000 + ")";
+			
             document.querySelector('#keyFound').innerHTML = shift.join(' ');
 
             document.querySelector('#decodedMessage').innerHTML = decoding(text, shift.join(''));

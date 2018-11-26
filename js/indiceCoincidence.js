@@ -61,7 +61,7 @@ function getIndicesCoincidences(taillesCle, texte)
 
 function getLongueurCleIC(texte)
 {
-	var seuil = 0.06;
+	var seuil = 0.065;
 	var longueurTrouvee = false;
 	var i = 1;
 	var ics;
@@ -72,7 +72,7 @@ function getLongueurCleIC(texte)
 		if(ics[0] >= seuil)
 		{
 			longueurTrouvee = true;
-			return i;
+			return [i, ics[0]];
 		}
 		else
 			i++;

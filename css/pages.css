@@ -18,7 +18,7 @@
     margin: 5px;
 }
 
-#attackResult
+#attackResult, #attackResultIC
 {
     font-size: 2.5em;
 }
