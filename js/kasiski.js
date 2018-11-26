@@ -305,7 +305,7 @@ const scoringTests = function(frequency, language)
     }
 
     // console.log(scores);
-    return maxIndex;
+    return maxIndex; 
 }
 
 // Donne un score à la diférrence entre 2 tableaux de fréquence
