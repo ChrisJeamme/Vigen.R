@@ -42,7 +42,7 @@ const displayFrequencyChart = function(number)
                         "borderWidth":1
                     },
                     {
-                        "label":"Occurences en français",
+                        "label":"Occurences en Français",
                         "data":frenchFrequency.map(f=>f*numberOfLetterInText),
                         "fill":true,
                         "backgroundColor":Array(26).fill("rgba(116, 185, 255,1.0)"),
@@ -50,7 +50,7 @@ const displayFrequencyChart = function(number)
                         "borderWidth":1
                     },
                     {
-                        "label":"Occurences en anglais",
+                        "label":"Occurences en Anglais",
                         "data":englishFrequency.map(f=>f*numberOfLetterInText),
                         "fill":true,
                         "backgroundColor":Array(26).fill("rgba(0, 185, 255,1.0)"),
