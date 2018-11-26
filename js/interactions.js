@@ -36,7 +36,7 @@ const clickOnAttack = function()
             document.querySelector('#results').classList.remove('hide');
             document.querySelector('#displaySequences').innerHTML = textToDisplay;
             document.querySelector('#showDetails').innerHTML = infosToDisplay;
-            document.querySelector('#languageDetails').innerHTML = matchingLanguage;
+            // document.querySelector('#languageDetails').innerHTML = matchingLanguage;
             document.querySelector('#attackResult').innerHTML = "<strong>Kasiski : </strong>" + keyLength;
 			document.querySelector('#attackResultIC').innerHTML = "<strong>IC : </strong>" + keyLengthIC[0] + " (" + Math.round(keyLengthIC[1]*1000)/1000 + ")";
 			

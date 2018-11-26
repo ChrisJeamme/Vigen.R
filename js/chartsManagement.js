@@ -48,14 +48,14 @@ const displayFrequencyChart = function(number)
                         "backgroundColor":Array(26).fill("rgba(116, 185, 255,1.0)"),
                         "borderColor":Array(26).fill("rgba(9, 132, 227,1.0)"),
                         "borderWidth":1
-                    },
-                    {
-                        "label":"Occurences en Anglais",
-                        "data":englishFrequency.map(f=>f*numberOfLetterInText),
-                        "fill":true,
-                        "backgroundColor":Array(26).fill("rgba(0, 185, 255,1.0)"),
-                        "borderColor":Array(26).fill("rgba(0, 185, 255,0.8)"),
-                        "borderWidth":1
+                    // },
+                    // {
+                    //     "label":"Occurences en Anglais",
+                    //     "data":englishFrequency.map(f=>f*numberOfLetterInText),
+                    //     "fill":true,
+                    //     "backgroundColor":Array(26).fill("rgba(0, 185, 255,1.0)"),
+                    //     "borderColor":Array(26).fill("rgba(0, 185, 255,0.8)"),
+                    //     "borderWidth":1
                     }
                 ]
             },
