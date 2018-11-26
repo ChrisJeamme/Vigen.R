@@ -197,10 +197,7 @@ const intersect = function(array1, array2)
     let inter = array1.filter(value => {
         return -1 !== array2.indexOf(value)}
     );
-    if (inter.length === 0)
-        return array1;
-    else 
-        return inter;
+    return inter;
 }
 
 // Donne un tableau de tableau de fréquence pour chaque lettre de la clé
