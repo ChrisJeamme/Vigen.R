@@ -13,14 +13,19 @@
     border: 2px solid #ff3860;
 }
 
+.text-black *
+{
+    color: #000 !important;
+}
+
 .codeButton
 {
     margin: 5px;
 }
 
-#attackResult
+#attackResult, #attackResultIC
 {
-    font-size: 2.5em;
+    font-size: 2em;
 }
 
 #keyFound
@@ -41,31 +46,37 @@ i
 
 .seq1
 {
+    color: white;
     background-color: red;
 }
 
 .seq2
 {
-    background-color: purple;
+    color: white;
+    background-color: blue;
 }
 
 .seq3
 {
-    background-color: blue;
+    color: white;
+    background-color: purple;
 }
 
 .seq4
 {
-    background-color: green;
+    color: white;
+    background-color: orange;
 }
 
 .seq5
 {
-    background-color: orange;
+    color: white;
+    background-color: green;
 }
 
 .seqx
 {
+    color: white;
     background-color: black;
 }
 

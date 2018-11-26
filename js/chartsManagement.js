@@ -7,7 +7,7 @@ const createFrequencyChart = function(useless,number)
 
     // Ajout d'un bouton pour le graphique
     document.querySelector('#chartMenu').innerHTML=document.querySelector('#chartMenu').innerHTML.concat(`
-    <li id="chartButton`+number+`"><a class="button is-link is-rounded" style="margin: 1px;" onClick='displayFrequencyChart(`+number+`)'>L`+(number+1)+`</a></li>
+    <li id="chartButton`+number+`"><a class="button is-danger is-rounded" style="margin: 1px;" onClick='displayFrequencyChart(`+number+`)'>L`+(number+1)+`</a></li>
     `);
 }
 
@@ -42,20 +42,20 @@ const displayFrequencyChart = function(number)
                         "borderWidth":1
                     },
                     {
-                        "label":"Occurences en français",
+                        "label":"Occurences en Français",
                         "data":frenchFrequency.map(f=>f*numberOfLetterInText),
                         "fill":true,
                         "backgroundColor":Array(26).fill("rgba(116, 185, 255,1.0)"),
                         "borderColor":Array(26).fill("rgba(9, 132, 227,1.0)"),
                         "borderWidth":1
-                    },
-                    {
-                        "label":"Occurences en anglais",
-                        "data":englishFrequency.map(f=>f*numberOfLetterInText),
-                        "fill":true,
-                        "backgroundColor":Array(26).fill("rgba(0, 185, 255,1.0)"),
-                        "borderColor":Array(26).fill("rgba(0, 185, 255,0.8)"),
-                        "borderWidth":1
+                    // },
+                    // {
+                    //     "label":"Occurences en Anglais",
+                    //     "data":englishFrequency.map(f=>f*numberOfLetterInText),
+                    //     "fill":true,
+                    //     "backgroundColor":Array(26).fill("rgba(0, 185, 255,1.0)"),
+                    //     "borderColor":Array(26).fill("rgba(0, 185, 255,0.8)"),
+                    //     "borderWidth":1
                     }
                 ]
             },
@@ -83,7 +83,6 @@ const displayChart = function(number)
             if(chart.tagName=="CANVAS")
             {
                 hideElement("#"+chart.id);
-
             }
         });
     displayElement("#chart"+number);

@@ -29,6 +29,7 @@
         <script src="js/kasiskiTest.js"></script>
         <script src="js/chartsManagement.js"></script>
         <script src="js/interactions.js"></script>
+		<script src="js/indiceCoincidence.js"></script>
 
         <!-- Page -->
         <section class="hero is-bold is-info is-fullheight">
@@ -69,53 +70,6 @@
 
                     <div id="encodingSection" class="hide"> <!-- Partie Encodage / Décodage -->
                         <button class="closeMod button is-large is-danger is-rounded" hidden>Retour</button> <!-- Bouton de fermeture du mode -->
-
-
-                        <!-- <div class="tile is-ancestor">
-                            <div class="tile is-vertical is-8">
-                                <div class="tile">
-                                    <div class="tile is-parent is-vertical">
-                                        <article class="tile is-child notification is-info">
-                                            <h1 class="title">
-                                                Message clair
-                                            </h1>
-                                            <h2 class="subtitle">
-                                                Tapez votre message à coder
-                                            </h2>
-                                            <textarea id="encodingTextArea" class="textarea" placeholder="Message à coder"></textarea>
-                                            <br />
-                                            <h2 class="subtitle">
-                                                Tapez votre clé secrète
-                                            </h2>
-                                            <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
-                                        </article>
-                                    </div>
-                                    <div class="tile is-parent">
-                                        <article class="tile is-child notification is-info is-inline-flex" style="flex-direction: column; justify-content: center;">
-                                            <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
-                                            <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
-                                        </article>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tile is-parent is-vertical">
-                                <article class="tile is-child notification is-info">
-                                    <h1 class="title">
-                                        Message chiffré
-                                    </h1>
-                                    <h2 class="subtitle">
-                                        Tapez votre message à décoder
-                                    </h2>
-                                    <textarea id="decodingTextArea" class="textarea" placeholder="Message à décoder"></textarea>
-
-                                    <br />
-                                    <h2 class="subtitle">
-                                        Tapez votre clé secrète
-                                    </h2>
-                                    <textarea id="decodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
-                                </article>
-                            </div>
-                        </div> -->
 
                         <div class="columns">
                             <div class="column">
@@ -172,6 +126,7 @@
                         <textarea id="attackTextArea" class="textarea" placeholder="Chiffré à attaquer"></textarea>
                         
                         <br />
+                        
                         <button id="attackButton" class="button is-large is-primary is-rounded" hidden>Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
 
                         <br />
@@ -202,17 +157,29 @@
                         </div>
                     </div>
                 </section>
-                <section class="hero is-link is-bold">
+                <!-- <section class="hero is-link is-bold">
+                    <div class="hero-body">
+                        <div class="container">
+                        <h1 class="title">
+                            Langue la plus probable
+                        </h1>
+                        <div id="languageDetails"></div>
+                        </div>
+                    </div>
+                </section> -->
+                <section class="hero is-info">
                     <div class="hero-body">
                         <div class="container">
                         <h1 class="title">
                             Longueur de la clé
                         </h1>
-                        <div id="attackResult"></div>
+                        <div class="columns">
+                            <div id="attackResult" class="column is-4"></div>
+                            <div id="attackResultIC" class="column is-4"></div>
                         </div>
                     </div>
                 </section>
-                <section class="hero is-info">
+                <section class="hero is-link is-bold">
                     <div class="hero-body">
                         <div class="container">
                         <h1 class="title">
@@ -222,7 +189,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="hero is-link is-bold">
+                <section class="hero is-info">
                     <div class="hero-body">
                         <div class="container">
                         <h1 class="title">
@@ -232,7 +199,7 @@
                         </div>
                     </div>
                 </section>
-                <section class="hero is-info">
+                <section class="hero is-link is-bold">
                     <div class="hero-body">
                         <div class="container">
                         <h1 class="title">
