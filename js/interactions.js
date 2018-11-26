@@ -5,15 +5,30 @@ const clickOnAttack = function()
     else
     {
         let text = document.querySelector('#attackTextArea').value;
-        let keyLength = findKeyLength(text);
+        let result = findKeyLength(text);
+        let keyLength = result.keyLength;
+        let sequences = result.sequences;
+        let infos = result.factorsToDisplay;
         
-        frequency(text,keyLength);
-        let shift = findAllShift();
+        if (keyLength !== undefined)
+        {
+            frequency(text,keyLength);
+            let shift = findAllShift();
+            let textToDisplay = colorSequences(text, sequences);
+            let infosToDisplay = displayInfos(infos);
 
-        document.querySelector('#attackResult').innerHTML = "Clé de longueur "+keyLength;
-        document.querySelector('#attackResult').innerHTML += "<br /> Clé = "+shift.join(' ');
+            document.querySelector('#results').classList.remove('hide');
+            document.querySelector('#displaySequences').innerHTML = textToDisplay;
+            document.querySelector('#showDetails').innerHTML = infosToDisplay;
+            document.querySelector('#attackResult').innerHTML = keyLength;
+            document.querySelector('#keyFound').innerHTML = shift.join(' ');
 
+            document.querySelector('#decodedMessage').innerHTML = decoding(text, shift.join(''));
 
+        } else 
+        {
+            document.querySelector('#attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
+        }
     }
 }
 
@@ -36,16 +51,28 @@ const clickOnBomb = function()
 
 const clickOnDecodingButton = function()
 {
-    if(document.querySelector('#decodingTextArea').value == "")
+    let textToDecode = document.querySelector('#decodingTextArea').value;
+    let keyForDecoding = document.querySelector('#decodingKeyTextArea').value;
+
+    if(textToDecode == "")
         displayErrorColor("#decodingTextArea");
     else
     {
-        if(document.querySelector('#decodingKeyTextArea').value == "")
+        if(keyForDecoding == "")
             displayErrorColor("#decodingKeyTextArea");
         else
         {
-            document.querySelector('#encodingKeyTextArea').value = document.querySelector('#decodingKeyTextArea').value;
-            document.querySelector('#encodingTextArea').value = decoding(document.querySelector('#decodingTextArea').value, document.querySelector('#decodingKeyTextArea').value);
+            textToDecode = messageTransformation(noAccent(textToDecode));
+            keyForDecoding = messageTransformation(noAccent(keyForDecoding));
+
+            // Mise en forme du message
+            document.querySelector('#decodingTextArea').value = textToDecode; 
+            // Mise en forme de la clé
+            document.querySelector('#decodingKeyTextArea').value = keyForDecoding; 
+            // Copie de la clé du coté encodage
+            document.querySelector('#encodingKeyTextArea').value = keyForDecoding;
+            // Décodage et ecriture du coté encodage
+            document.querySelector('#encodingTextArea').value = decoding(textToDecode, keyForDecoding);
         }
     }
 }

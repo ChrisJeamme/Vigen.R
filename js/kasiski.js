@@ -1,6 +1,7 @@
 let frequencies;
 let occurencies;
 let frenchFrequency = [0.0840, 0.0106, 0.0302, 0.0418, 0.1726, 0.0112, 0.0127, 0.0092, 0.0733, 0.0031, 0.0005, 0.0601, 0.0296, 0.0713, 0.0526, 0.0301, 0.0098, 0.0655, 0.0808, 0.0707, 0.0574, 0.0132, 0.0004, 0.0045, 0.003, 0.0012]
+let englishFrequency = [0.0812, 0.0149, 0.0271, 0.0432, 0.1202, 0.0230, 0.0203, 0.0592, 0.0731, 0.001, 0.0069, 0.0398, 0.0261, 0.0695, 0.0768, 0.0182, 0.0011, 0.0602, 0.0628, 0.0910, 0.0288, 0.0111, 0.0209, 0.0017, 0.0211, 0.0007]
 
 // Trouve la longueur de la clé de cryptage
 const findKeyLength = function(message)
@@ -8,23 +9,16 @@ const findKeyLength = function(message)
     let cutSize = 30;
     let possibleKeyLengths = [];
     let savedSequences = [];
+    let sequencesToDisplay = [];
     let numberOfIntersection = 0;
     
     while(cutSize > 2 && possibleKeyLengths.length !== 1 && numberOfIntersection<5)
     {
-        // console.log("cutSize = ", cutSize);
         let interestingSequences = {};
-        
         findRepetition(cutSize, message, interestingSequences, savedSequences);
-    
-        // console.log(sequences);
-        // console.log("Séquences intéréssantes = ");
-        // console.log(interestingSequences);
     
         for(seq in interestingSequences) //On parcourt les séquences intéressantes trouvées de cette longueur
         {
-            // console.log(seq);
-            // console.log("Longueur = "+interestingSequences[seq].index.length);
             interestingSequences[seq].indexSeparation = [];
     
             for(let i=0; i<interestingSequences[seq].index.length-1; i++)
@@ -33,8 +27,6 @@ const findKeyLength = function(message)
                 interestingSequences[seq].indexSeparation.push(seperationLength);
             }
 
-            //console.log("Sépération des index = " + interestingSequences[seq].indexSeparation);
-
             interestingSequences[seq].indexSeparation.forEach(
                 (seperationLength)=>
                 {
@@ -42,27 +34,102 @@ const findKeyLength = function(message)
                     {
                         possibleKeyLengths = findDividers(seperationLength);
                     }
-                    possibleKeyLengths = intersect(possibleKeyLengths, findDividers(seperationLength));
+                    let dividers = findDividers(seperationLength);
+                    let intersection = intersect(possibleKeyLengths, dividers);
+                    if (intersection.length !== 0)
+                    {
+                        let newSeq = {};
+                        newSeq.name = seq
+                        newSeq.seperationLength = seperationLength;
+                        newSeq.dividers = dividers;
+                        sequencesToDisplay.push(newSeq);
+                        possibleKeyLengths = intersection;
+                    } else 
+                    {
+                        return {
+                            keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
+                            sequences: savedSequences,
+                            factorsToDisplay: sequencesToDisplay
+                        };
+                    }
                     numberOfIntersection++;
-                    // addNewPossibleKeyLength(possibleKeyLengths, seperationLength);
-                    //console.log(possibleKeyLengths);
                 }
             )
         }
         cutSize--;
-        // console.log("SavedSequences :", savedSequences);
-        // console.log("possibleKeyLength :", possibleKeyLengths);
     }
-    // console.log("Longueur de la clé :", possibleKeyLengths[possibleKeyLengths.length-1]);
-    return possibleKeyLengths[possibleKeyLengths.length-1];
+    return {
+        keyLength: possibleKeyLengths[possibleKeyLengths.length-1],
+        sequences: savedSequences,
+        factorsToDisplay: sequencesToDisplay
+    };
 };
 
-// Ajoute (si pas déjà présent) un nombre et ses diviseurs à la liste des longueurs de clé possible
-const addNewPossibleKeyLength = function(possibleKeyLengths, seperationLength)
+const colorSequences = function(text, sequencesArray)
 {
-    let dividers = findDividers(seperationLength);
+    let saveColors = {};
+    for (let i=0; i<sequencesArray.length; i++)
+    {
+        let sequence = sequencesArray[i];
+        let size = sequence.length;
+        for (let j=0; j<text.length-size; j++)
+        {
+            if (text.substring(j, j+size) === sequence)
+            {
+                for (let k=j; k<j+size; k++)
+                {
+                    if (saveColors[k])
+                    {
+                        saveColors[k] = 'x'; //Chevauchement entre 2 facteurs
+                    }
+                    else 
+                    {
+                        saveColors[k] = i+1;
+                    }
+                }
+            }
+        }
+    }
+    let newText = "";
+    for (let i=0; i<text.length; i++)
+    {
+        if (saveColors[i])
+        {
+            newText += '<i class="seq'+saveColors[i]+'">'+text.charAt(i)+'</i>';
+        } else 
+        {
+            newText += text.charAt(i);
+        }
+    }
+    return newText;
+}
 
-    possibleKeyLengths = intersect(possibleKeyLengths, dividers); 
+const displayInfos = function(infos)
+{
+    let response = `<table class="table is-fullwidth box">
+                      <thead>
+                          <tr>
+                              <th>Facteur</th>
+                              <th>Distance</th>
+                              <th>Diviseurs possible</th>
+                          </tr>
+                       <thead>
+                       <tbody>`;
+
+    for (let i=0; i<infos.length; i++)
+    {
+        response += `<tr>
+                       <td><i class="seq`+(i+1)+`">`+infos[i].name+`</i></td>
+                       <td>`+infos[i].seperationLength+`</td>
+                       <td>`+infos[i].dividers+`</td>
+                    </tr>`;
+    }
+
+    response += `   </tbody>
+                </table>`;
+
+    return response;
+
 }
 
 // Découpe le message et trouve les séquences qui se répètent
@@ -248,7 +315,6 @@ const frequenceComparison = function(frequence1, frequence2)
         (freq1, i)=>
         {
             score += Math.abs(frequence2[i]-freq1);
-            // console.log(Math.abs(frequence2[i]-freq1))
         }
     )
     return 1/score;
