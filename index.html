@@ -16,10 +16,14 @@
         <!-- CSS -->
         <link rel="stylesheet" href="css/pages.css" />
         <link rel="stylesheet" href="css/chart.css" />
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">  
     </head>
     <body>
-        
-        <!-- Librarie Chart.js -->
+        <!-- Librairie Swal -->
+        <script src="lib/swal/sweetalert2.all.min.js"></script>
+
+        <!-- Librairie Chart.js -->
         <script src="lib/chart.js/Chart.min.js"></script>
 
         <!-- Scripts -->
@@ -46,7 +50,7 @@
                             <div class="navbar-end">
                                 <div class="tabs is-right">
                                     <span class="navbar-item">
-                                        <a class="button is-white is-outlined" href="https://github.com/ChrisJeamme/Vigen.R">
+                                        <a class="button code-source is-white is-outlined" href="https://github.com/ChrisJeamme/Vigen.R">
                                             <span class="icon">
                                                 <i class="fa fa-github"></i>
                                             </span>
@@ -61,18 +65,29 @@
             </div>
             <div class="hero-body"> <!-- Contenu central -->
                 <div class="container has-text-centered">
-                    <h1 class="title">
+                    <h1 class="title big-title">
                         Chiffre de Vigenère
                     </h1>
+
+                    <br />
+
+                    <p class="presentation-text" id="prezText">
+                        <strong>Vigen.R</strong> vous permet d'<strong>encoder / décoder</strong> des messages avec le chiffre de vigenère.
+                        <br />
+                        Vous pouvez également tenter de trouver la clé d'un message codé, d'origine Français, Anglais, Espagnol ou Allemand par <strong>attaque de Kasiski</strong> et <strong>attaque par indice de coincidence</strong>.
+                    </p>
                     
-                    <button class="button is-rounded is-large is-link" id="encodingMod">Encodage/Décodage</button> <br /><br />
-                    <button class="button is-rounded is-large is-link" id="attackMod">Attaque</button>
+                    <br />
+                    <br />
+
+                    <button class="button is-rounded is-large is-link button-home" id="encodingMod"><i class="fa fa-unlock icon-button"></i> Encodage / Décodage</button> <br /><br />
+                    <button class="button is-rounded is-large is-danger button-home" id="attackMod"><i class="fa fa-bomb icon-button"></i> Attaque</button>
 
                     <div id="encodingSection" class="hide"> <!-- Partie Encodage / Décodage -->
-                        <button class="closeMod button is-large is-danger is-rounded" hidden>Retour</button> <!-- Bouton de fermeture du mode -->
+                        <button class="closeMod button is-large is-rounded" hidden><i class="fa fa-arrow-left icon-button"></i> Retour</button> <!-- Bouton de fermeture du mode -->
 
-                        <div class="columns">
-                            <div class="column">
+                        <div class="text-columns">
+                            <div class="text-column">
                                 <h1 class="title">
                                     Message clair
                                 </h1>
@@ -87,11 +102,11 @@
                                 </h2>
                                 <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
                             </div>
-                            <div class="column is-inline-flex" style="flex-direction: column; justify-content: center;">
-                                <button id="encodingButton" onclick="clickOnEncodingButton()" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
-                                <button id="decodingButton" onclick="clickOnDecodingButton()" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
+                            <div class="text-column is-inline-flex" style="flex-direction: column; justify-content: center;">
+                                <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
+                                <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
                                </div>
-                            <div class="column">
+                            <div class="text-column">
                                 <h1 class="title">
                                     Message chiffré
                                 </h1>
@@ -113,7 +128,7 @@
                     </div>
 
                     <div id="attackSection" class="hide"> <!-- Partie Attaque -->
-                        <button class="closeMod button is-large is-danger is-rounded" hidden>Retour</button> <!-- Bouton de fermeture du mode -->
+                        <button class="closeMod button is-large is-rounded" hidden><i class="fa fa-arrow-left icon-button"></i> Retour</button> <!-- Bouton de fermeture du mode -->
                         <br />
                         <br />
                         
@@ -127,7 +142,7 @@
                         
                         <br />
                         
-                        <button id="attackButton" class="button is-large is-primary is-rounded" hidden onclick="clickOnAttack()">Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
+                        <button id="attackButton" class="button is-large is-link is-rounded" hidden>Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
 
                         <br />
                         <br />
