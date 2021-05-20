@@ -1,33 +1,34 @@
-const clickOnAttack = function()
+const clickOnAttack = function ()
 {
-    if(document.querySelector('#attackTextArea').value == "")
+    if (document.querySelector('#attackTextArea').value == "")
         displayErrorColor("#attackTextArea");
     else
     {
-
-		//Kasiski
+        //Kasiski
         let text = messageTransformation(noAccent(document.querySelector('#attackTextArea').value));
 
+        console.log(text)
         let result = findKeyLength(text);
+        console.log(result)
         let keyLength = result.keyLength;
         let infos = result.factorsToDisplay;
-		
-		//IC
-		let keyLengthIC = getLongueurCleIC(text);
-        
+
+        //IC
+        let keyLengthIC = getLongueurCleIC(text);
+
         if (keyLength !== undefined)
         {
-            frequency(text,keyLength);
+            frequency(text, keyLength);
 
             let matchingLanguage = scoringLanguages();
-            console.log("Langue la plus plausible = "+matchingLanguage);
+            console.log("Langue la plus plausible = " + matchingLanguage);
 
             let shiftMatchingLanguage = findAllShift(languages[languagesNames.indexOf(matchingLanguage)]);
             let shiftFR = findAllShift(frenchFrequency);
             // let shiftEN = findAllShift(englishFrequency);
             // let shiftES = findAllShift(spanishFrequency);
             // let shiftGER = findAllShift(germanFrequency);
-            
+
             let shift = shiftFR; // Selection ici du language utilisé pour la cryptanalyse : shiftMatchingLanguage / shiftFR / shiftEN / shiftES / shiftGER
 
             let textToDisplay = colorSequences(text, infos);
@@ -38,28 +39,29 @@ const clickOnAttack = function()
             document.querySelector('#showDetails').innerHTML = infosToDisplay;
             // document.querySelector('#languageDetails').innerHTML = matchingLanguage;
             document.querySelector('#attackResult').innerHTML = "<strong>Kasiski : </strong>" + keyLength;
-			document.querySelector('#attackResultIC').innerHTML = "<strong>IC : </strong>" + keyLengthIC[0] + " (" + Math.round(keyLengthIC[1]*1000)/1000 + ")";
-			
+            document.querySelector('#attackResultIC').innerHTML = "<strong>IC : </strong>" + keyLengthIC[0] + " (" + Math.round(keyLengthIC[1] * 1000) / 1000 + ")";
+
             document.querySelector('#keyFound').innerHTML = shift.join(' ');
 
-            document.querySelector('#decodedMessage').innerHTML = decoding(text,shift.join(''));
+            document.querySelector('#decodedMessage').innerHTML = decoding(text, shift.join(''));
 
         } else 
         {
-            document.querySelector('#attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
+            document.getElementById('attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
+            alert("Ce message n'a pas pu être attaqué")
         }
     }
 }
 
-const clickOnBomb = function()
+const clickOnBomb = function ()
 {
     goToAttackingMenu();
-        
+
     // Copie d'un éventuel contenu déjà saisie dans le menu de décodage
-    if(document.querySelector('#encodingTextArea').value == "")
+    if (document.querySelector('#encodingTextArea').value == "")
         displayErrorColor("#encodingTextArea");
-    else 
-        if(document.querySelector('#encodingKeyTextArea').value == "")
+    else
+        if (document.querySelector('#encodingKeyTextArea').value == "")
             displayErrorColor("#encodingKeyTextArea");
         else
         {
@@ -68,16 +70,16 @@ const clickOnBomb = function()
         }
 }
 
-const clickOnDecodingButton = function()
+const clickOnDecodingButton = function ()
 {
     let textToDecode = document.querySelector('#decodingTextArea').value;
     let keyForDecoding = document.querySelector('#decodingKeyTextArea').value;
 
-    if(textToDecode == "")
+    if (textToDecode == "")
         displayErrorColor("#decodingTextArea");
     else
     {
-        if(keyForDecoding == "")
+        if (keyForDecoding == "")
             displayErrorColor("#decodingKeyTextArea");
         else
         {
@@ -85,9 +87,9 @@ const clickOnDecodingButton = function()
             keyForDecoding = messageTransformation(noAccent(keyForDecoding));
 
             // Mise en forme du message
-            document.querySelector('#decodingTextArea').value = textToDecode; 
+            document.querySelector('#decodingTextArea').value = textToDecode;
             // Mise en forme de la clé
-            document.querySelector('#decodingKeyTextArea').value = keyForDecoding; 
+            document.querySelector('#decodingKeyTextArea').value = keyForDecoding;
             // Copie de la clé du coté encodage
             document.querySelector('#encodingKeyTextArea').value = keyForDecoding;
             // Décodage et ecriture du coté encodage
@@ -96,15 +98,15 @@ const clickOnDecodingButton = function()
     }
 }
 
-const clickOnEncodingButton = function()
+const clickOnEncodingButton = function ()
 {
     let textToEncode = document.querySelector('#encodingTextArea').value;
     let keyForEncoding = document.querySelector('#encodingKeyTextArea').value;
 
-    if(textToEncode == "")
+    if (textToEncode == "")
         displayErrorColor("#encodingTextArea");
-    else 
-        if(keyForEncoding == "")
+    else
+        if (keyForEncoding == "")
             displayErrorColor("#encodingKeyTextArea");
         else
         {
@@ -112,9 +114,9 @@ const clickOnEncodingButton = function()
             keyForEncoding = messageTransformation(noAccent(keyForEncoding));
 
             // Mise en forme du message
-            document.querySelector('#encodingTextArea').value = textToEncode; 
+            document.querySelector('#encodingTextArea').value = textToEncode;
             // Mise en forme de la clé
-            document.querySelector('#encodingKeyTextArea').value = keyForEncoding; 
+            document.querySelector('#encodingKeyTextArea').value = keyForEncoding;
             // Copie de la clé du coté décodage
             document.querySelector('#decodingKeyTextArea').value = keyForEncoding;
             // Décodage et ecriture du coté décodage

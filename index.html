@@ -88,8 +88,8 @@
                                 <textarea id="encodingKeyTextArea" class="textarea" placeholder="Clé secrète"></textarea>
                             </div>
                             <div class="column is-inline-flex" style="flex-direction: column; justify-content: center;">
-                                <button id="encodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
-                                <button id="decodingButton" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
+                                <button id="encodingButton" onclick="clickOnEncodingButton()" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-right"></i></button>
+                                <button id="decodingButton" onclick="clickOnDecodingButton()" class="codeButton button is-rounded is-link is-large is-fullwidth"><i class="fa fa-angle-double-left"></i></button>
                                </div>
                             <div class="column">
                                 <h1 class="title">
@@ -127,7 +127,7 @@
                         
                         <br />
                         
-                        <button id="attackButton" class="button is-large is-primary is-rounded" hidden>Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
+                        <button id="attackButton" class="button is-large is-primary is-rounded" hidden onclick="clickOnAttack()">Lancer la cryptanalyse</button> <!-- Bouton de fermeture du mode -->
 
                         <br />
                         <br />
