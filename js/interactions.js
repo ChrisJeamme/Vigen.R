@@ -1,7 +1,12 @@
+const Swal = require('../lib/swal/swal/sweetalert2.all.min')
+
 const clickOnAttack = function ()
 {
     if (document.querySelector('#attackTextArea').value == "")
+    {
         displayErrorColor("#attackTextArea");
+        Swal.fire({ icon: 'error', title: 'Erreur', text: "Le message est vide" })
+    }
     else
     {
         //Kasiski
@@ -47,8 +52,7 @@ const clickOnAttack = function ()
 
         } else 
         {
-            document.getElementById('attackResult').innerHTML += "Ce message n'a pas pu être attaqué";
-            alert("Ce message n'a pas pu être attaqué")
+            Swal.fire({ icon: 'error', title: 'Erreur', text: "Echec de l'attaque sur ce message" })
         }
     }
 }

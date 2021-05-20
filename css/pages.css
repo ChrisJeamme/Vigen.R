@@ -1,93 +1,119 @@
-.hide
-{
-    display: none !important; 
+.hide {
+  display: none !important;
 }
 
-.navbar-brand
-{
-    font-size: 2em;
+.big-title {
+  font-size: 56px;
 }
 
-.error
-{
-    border: 2px solid #ff3860;
+.code-source {
+  border-radius: 32px;
 }
 
-.text-black *
-{
-    color: #000 !important;
+.presentation-text {
+  max-width: 700px;
+  text-align: center;
+  margin: auto;
+  font-size: 22px;
 }
 
-.codeButton
-{
-    margin: 5px;
+.navbar-brand {
+  font-size: 2em;
 }
 
-#attackResult, #attackResultIC
-{
-    font-size: 2em;
+.icon-button {
+  margin-right: 10px;
 }
 
-#keyFound
-{
-    font-size: 3em;
+.error {
+  border: 2px solid #ff3860;
 }
 
-#displaySequences
-{
-    word-wrap: break-word;
-    text-align: left;
+.text-black * {
+  color: #000 !important;
 }
 
-i 
-{
-    font-style: normal;
+#encodingButton,
+#decodingButton {
+  width: min-content;
 }
 
-.seq1
-{
-    color: white;
-    background-color: red;
+.text-columns {
+  display: flex;
+  justify-content: center;
+}
+.text-column {
+  margin: 5px;
 }
 
-.seq2
-{
-    color: white;
-    background-color: blue;
+.codeButton {
+  margin: 5px;
 }
 
-.seq3
-{
-    color: white;
-    background-color: purple;
+.button-home {
+  width: 320px;
 }
 
-.seq4
-{
-    color: white;
-    background-color: orange;
+.textarea {
+  resize: none;
+  border-radius: 32px;
+  width: 400px;
 }
 
-.seq5
-{
-    color: white;
-    background-color: green;
+#attackResult,
+#attackResultIC {
+  font-size: 2em;
 }
 
-.seqx
-{
-    color: white;
-    background-color: black;
+#keyFound {
+  font-size: 3em;
 }
 
-table
-{
-    background-color: none;
+#displaySequences {
+  word-wrap: break-word;
+  text-align: left;
 }
 
-.textarea
-{
-    margin: 0;
+i {
+  font-style: normal;
+}
+
+.seq1 {
+  color: white;
+  background-color: red;
+}
+
+.seq2 {
+  color: white;
+  background-color: blue;
+}
+
+.seq3 {
+  color: white;
+  background-color: purple;
+}
+
+.seq4 {
+  color: white;
+  background-color: orange;
+}
+
+.seq5 {
+  color: white;
+  background-color: green;
+}
+
+.seqx {
+  color: white;
+  background-color: black;
+}
+
+table {
+  background-color: none;
+}
+
+.textarea {
+  margin: 0;
 }
 
 /* #results, #results .title

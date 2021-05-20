@@ -81,6 +81,7 @@ const goToAttackingMenu = function()
     actualMenu = "Attack";
 
     // Cache tout
+    hideElement("#prezText");
     hideElement("#encodingMod");
     hideElement("#attackMod");
     hideElement("#encodingSection");
@@ -94,6 +95,7 @@ const goToEncodingMenu = function()
     actualMenu = "Encoding";
 
     // Cache tout
+    hideElement("#prezText");
     hideElement("#encodingMod");
     hideElement("#attackSection");
     hideElement("#attackMod");
@@ -112,6 +114,7 @@ const goToMainMenu = function()
     hideElement("#results");
 
     // Affichage des boutons du menu 
+    displayElement("#prezText");
     displayElement("#encodingMod");
     displayElement("#attackMod");
 }
