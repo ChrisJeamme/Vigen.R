@@ -1,5 +1,3 @@
-const Swal = require('../lib/swal/swal/sweetalert2.all.min')
-
 const clickOnAttack = function ()
 {
     if (document.querySelector('#attackTextArea').value == "")
@@ -23,6 +21,15 @@ const clickOnAttack = function ()
 
         if (keyLength !== undefined)
         {
+            Swal.fire({
+              toast: true,
+              position: 'top',
+              timer: 3000,
+              showConfirmButton: false,
+              title: 'Succès',
+              text: 'Le message a été décrypté',
+              icon: 'success',
+            });
             frequency(text, keyLength);
 
             let matchingLanguage = scoringLanguages();
